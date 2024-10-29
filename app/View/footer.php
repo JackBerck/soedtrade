@@ -9,12 +9,12 @@
                 Beranda
             </a>
             <a
-                href="/tentang-kami"
+                href="/about-us"
                 class="leading-6 text-gray-300 hover:text-gray-500">
                 Tentang Kami
             </a>
             <a
-                href="/hubungi-kami"
+                href="/contact-us"
                 class="leading-6 text-gray-300 hover:text-gray-500">
                 Hubungi Kami
             </a>
@@ -64,7 +64,7 @@
     </div>
 </section>
 
-<script src="./public/js/app.js"></script>
+<script src="/js/app.js" type="module"></script>
 </body>
 
 </html>

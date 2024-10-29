@@ -30,15 +30,20 @@ class UserService
 
         try {
             Database::beginTransaction();
-            $user = $this->userRepository->findById($request->id);
+            $user = $this->userRepository->findById($request->user_id);
             if ($user != null) {
                 throw new ValidationException("User Id already exists");
             }
 
             $user = new User();
-            $user->id = $request->id;
-            $user->name = $request->name;
+            $user->user_id = $request->user_id;
+            $user->username = $request->username;
+            $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
+            $user->profile_image = $request->profile_image;
+            $user->phone_number = $request->phone_number;
+            $user->address = $request->address;
+            $user->created_at = date("Y-m-d H:i:s");
 
             $this->userRepository->save($user);
 
@@ -56,10 +61,9 @@ class UserService
     private function validateUserRegistrationRequest(UserRegisterRequest $request)
     {
         if (
-            $request->id == null || $request->name == null || $request->password == null ||
-            trim($request->id) == "" || trim($request->name) == "" || trim($request->password) == ""
+            $request->user_id == null || $request->username == null || $request->password == null || $request->email == null || $request->profile_image == null || $request->phone_number == null || $request->address == null || trim($request->user_id) == "" || trim($request->username) == "" || trim($request->password) == "" || trim($request->email) == "" || trim($request->profile_image) == "" || trim($request->phone_number) == "" || trim($request->address) == ""
         ) {
-            throw new ValidationException("Id, Name, Password can not blank");
+            throw new ValidationException("Name, Email, Password, Phone Number, Address Can Not Blank");
         }
     }
 
@@ -67,7 +71,7 @@ class UserService
     {
         $this->validateUserLoginRequest($request);
 
-        $user = $this->userRepository->findById($request->id);
+        $user = $this->userRepository->findById($request->user_id);
         if ($user == null) {
             throw new ValidationException("Id or password is wrong");
         }
@@ -98,12 +102,16 @@ class UserService
         try {
             Database::beginTransaction();
 
-            $user = $this->userRepository->findById($request->id);
+            $user = $this->userRepository->findById($request->user_id);
             if ($user == null) {
                 throw new ValidationException("User is not found");
             }
 
-            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->profile_image = $request->profile_image;
+            $user->phone_number = $request->phone_number;
+            $user->address = $request->address;
             $this->userRepository->update($user);
 
             Database::commitTransaction();
@@ -120,8 +128,7 @@ class UserService
     private function validateUserProfileUpdateRequest(UserProfileUpdateRequest $request)
     {
         if (
-            $request->id == null || $request->name == null ||
-            trim($request->id) == "" || trim($request->name) == ""
+            $request->user_id == null || $request->username == null || $request->email == null || $request->profile_image == null || $request->phone_number == null || $request->address == null || trim($request->user_id) == "" || trim($request->username) == "" || trim($request->email) == "" || trim($request->profile_image) == "" || trim($request->phone_number) == "" || trim($request->address) == ""
         ) {
             throw new ValidationException("Id, Name can not blank");
         }
@@ -134,7 +141,7 @@ class UserService
         try {
             Database::beginTransaction();
 
-            $user = $this->userRepository->findById($request->id);
+            $user = $this->userRepository->findById($request->user_id);
             if ($user == null) {
                 throw new ValidationException("User is not found");
             }
@@ -160,10 +167,10 @@ class UserService
     private function validateUserPasswordUpdateRequest(UserPasswordUpdateRequest $request)
     {
         if (
-            $request->id == null || $request->oldPassword == null || $request->newPassword == null ||
-            trim($request->id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""
+            $request->user_id == null || $request->oldPassword == null || $request->newPassword == null ||
+            trim($request->user_id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""
         ) {
-            throw new ValidationException("Id, Old Password, New Password can not blank");
+            throw new ValidationException("Old Password, New Password can not blank");
         }
     }
 }

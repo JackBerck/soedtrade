@@ -5,11 +5,15 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title><?= $model['title'] ?? 'Login Management' ?></title>
+      <title><?= $model['title'] ?? 'Selamat Datang' ?> | SoedTrade</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <link rel="stylesheet" href="./public/css/output.css">
+        <link
+                href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css"
+                rel="stylesheet"
+        />
+      <link rel="stylesheet" href="/css/output.css">
 </head>
 
 <body>
@@ -59,22 +63,22 @@
                               </li>
                               <li>
                                     <a
-                                          href="/tentang-kami"
+                                          href="/about-us"
                                           class="block py-2 px-3 rounded text-light-base">Tentang Kami</a>
                               </li>
                               <li>
                                     <a
-                                          href="/hubungi-kami"
+                                          href="/contact-us"
                                           class="block py-2 px-3 rounded text-light-base">Hubungi Kami</a>
                               </li>
                               <li>
                                     <a
-                                          href="/masuk"
+                                          href="/users/login"
                                           class="block py-2 px-3 rounded text-light-base bg-blue-base">Masuk</a>
                               </li>
                               <li>
                                     <a
-                                          href="/daftar"
+                                          href="/users/register"
                                           class="block py-2 px-3 rounded text-light-base ring-2 ring-blue-base">Daftar</a>
                               </li>
                         </ul>

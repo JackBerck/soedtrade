@@ -1,22 +1,22 @@
 <?php
 $slides = [
     [
-        "image" => "./public/images/banners/warung-makan.webp",
+        "image" => "/images/banners/warung-makan.webp",
         "title" => "Slide 1",
     ],
     [
-        "image" => "./public/images/banners/laundry.jpg",
+        "image" => "/images/banners/laundry.jpg",
         "title" => "Slide 2",
     ],
     [
-        "image" => "./public/images/banners/bengkel-motor.jpg",
+        "image" => "/images/banners/bengkel-motor.jpg",
         "title" => "Slide 3",
     ],
 ];
 
 $products = [
     [
-        "image" => "./public/images/products/grand-astrea-96.jpg",
+        "image" => "/images/products/grand-astrea-96.jpg",
         "title" => "Honda Grand Astrea 96",
         "price" => 5000000,
         "description" =>
@@ -25,7 +25,7 @@ $products = [
         "category" => "Motor",
     ],
     [
-        "image" => "./public/images/products/honda-goldwing.jpg",
+        "image" => "/images/products/honda-goldwing.jpg",
         "title" => "Honda Goldwing",
         "price" => 100000000,
         "description" =>
@@ -34,7 +34,7 @@ $products = [
         "category" => "Motor",
     ],
     [
-        "image" => "./public/images/products/lenovo-yoga-pro-9.jpg",
+        "image" => "/images/products/lenovo-yoga-pro-9.jpg",
         "title" => "Lenovo Yoga Pro 9",
         "price" => 15000000,
         "description" =>
@@ -43,7 +43,7 @@ $products = [
         "category" => "Laptop",
     ],
     [
-        "image" => "./public/images/products/rog-phone-2.jpg",
+        "image" => "/images/products/rog-phone-2.jpg",
         "title" => "Asus ROG Phone 2",
         "price" => 8000000,
         "description" =>
@@ -52,7 +52,7 @@ $products = [
         "category" => "Handphone",
     ],
     [
-        "image" => "./public/images/products/sony-a7-mark-2.jpg",
+        "image" => "/images/products/sony-a7-mark-2.jpg",
         "title" => "Sony A7 Mark 2",
         "price" => 12000000,
         "description" =>
@@ -61,7 +61,7 @@ $products = [
         "category" => "Kamera",
     ],
     [
-        "image" => "./public/images/products/tuf-gaming.jpg",
+        "image" => "/images/products/tuf-gaming.jpg",
         "title" => "TUF Gaming",
         "price" => 20000000,
         "description" =>
