@@ -32,23 +32,26 @@ class UserController
     public function register()
     {
         View::render('User/register', [
-            'title' => 'Register new User'
+            'title' => 'Daftar Akun Baru'
         ]);
     }
 
     public function postRegister()
     {
         $request = new UserRegisterRequest();
-        $request->id = $_POST['id'];
-        $request->name = $_POST['name'];
+        $request->username = $_POST['username'];
+        $request->email = $_POST['email'];
         $request->password = $_POST['password'];
+        $request->profile_image = $_POST['profile_image'];
+        $request->phone_number = $_POST['phone_number'];
+        $request->address = $_POST['address'];
 
         try {
             $this->userService->register($request);
             View::redirect('/users/login');
         } catch (ValidationException $exception) {
             View::render('User/register', [
-                'title' => 'Register new User',
+                'title' => 'Daftar Akun Baru',
                 'error' => $exception->getMessage()
             ]);
         }
@@ -57,23 +60,23 @@ class UserController
     public function login()
     {
         View::render('User/login', [
-            "title" => "Login user"
+            "title" => "Masuk ke Akun"
         ]);
     }
 
     public function postLogin()
     {
         $request = new UserLoginRequest();
-        $request->id = $_POST['id'];
+        $request->email = $_POST['email'];
         $request->password = $_POST['password'];
 
         try {
             $response = $this->userService->login($request);
-            $this->sessionService->create($response->user->id);
+            $this->sessionService->create($response->user->user_id);
             View::redirect('/');
         } catch (ValidationException $exception) {
             View::render('User/login', [
-                'title' => 'Login user',
+                'title' => 'Masuk ke Akun',
                 'error' => $exception->getMessage()
             ]);
         }
@@ -90,10 +93,13 @@ class UserController
         $user = $this->sessionService->current();
 
         View::render('User/profile', [
-            "title" => "Update user profile",
+            "title" => "Perbarui Profil",
             "user" => [
-                "id" => $user->id,
-                "name" => $user->name
+                "username" => $user->username,
+                "email" => $user->email,
+                "phone_number" => $user->phone_number,
+                "address" => $user->address,
+                "profile_image" => $user->profile_image
             ]
         ]);
     }
@@ -103,18 +109,22 @@ class UserController
         $user = $this->sessionService->current();
 
         $request = new UserProfileUpdateRequest();
-        $request->id = $user->id;
-        $request->name = $_POST['name'];
+        $request->user_id = $user->user_id;
+        $request->username = $_POST['username'];
+        $request->email = $_POST['email'];
+        $request->profile_image = $_POST['profile_image'];
+        $request->phone_number = $_POST['phone_number'];
+        $request->address = $_POST['address'];
 
         try {
             $this->userService->updateProfile($request);
             View::redirect('/');
         } catch (ValidationException $exception) {
             View::render('User/profile', [
-                "title" => "Update user profile",
+                "title" => "Perbarui Profil",
                 "error" => $exception->getMessage(),
                 "user" => [
-                    "id" => $user->id,
+                    "id" => $user->user_id,
                     "name" => $_POST['name']
                 ]
             ]);
@@ -127,7 +137,7 @@ class UserController
         View::render('User/password', [
             "title" => "Update user password",
             "user" => [
-                "id" => $user->id
+                "id" => $user->user_id
             ]
         ]);
     }
@@ -136,7 +146,7 @@ class UserController
     {
         $user = $this->sessionService->current();
         $request = new UserPasswordUpdateRequest();
-        $request->id = $user->id;
+        $request->user_id = $user->user_id;
         $request->oldPassword = $_POST['oldPassword'];
         $request->newPassword = $_POST['newPassword'];
 
@@ -148,7 +158,7 @@ class UserController
                 "title" => "Update user password",
                 "error" => $exception->getMessage(),
                 "user" => [
-                    "id" => $user->id
+                    "id" => $user->user_id
                 ]
             ]);
         }

@@ -76,12 +76,13 @@
                     <span class="text-xs text-center">atau login dengan email</span>
                     <span class="border-b w-1/5 lg:w-1/4"></span>
                 </div>
-                <form action="" class="small-font-size flex flex-col gap-4 mb-4">
+                <form action="/users/login" method="post" class="small-font-size flex flex-col gap-4 mb-4">
                     <div class="">
                         <label class="block font-semibold mb-2">Alamat email</label>
                         <input
                                 class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                                 type="email"
+                                name="email"
                                 placeholder="Masukkan alamat email..."
                                 required
                         />
@@ -94,6 +95,7 @@
                         <input
                                 class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                                 type="password"
+                                name="password"
                                 placeholder="Masukkan password..."
                                 required
                         />

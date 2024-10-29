@@ -4,6 +4,6 @@ namespace JackBerck\SoedTrade\Model;
 
 class UserLoginRequest
 {
-    public ?string $user_id = null;
+    public ?string $email = null;
     public ?string $password = null;
 }

@@ -15,36 +15,42 @@ class UserRepository
 
     public function save(User $user): User
     {
-        $statement = $this->connection->prepare("INSERT INTO users(id, name, password) VALUES (?, ?, ?)");
+        $statement = $this->connection->prepare("INSERT INTO users(username, email, password, profile_image, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)");
         $statement->execute([
-            $user->id,
-            $user->name,
-            $user->password
+            $user->username,
+            $user->email,
+            $user->password,
+            $user->profile_image,
+            $user->phone_number,
+            $user->address
         ]);
         return $user;
     }
 
     public function update(User $user): User
     {
-        $statement = $this->connection->prepare("UPDATE users SET name = ?, password = ? WHERE id = ?");
+        $statement = $this->connection->prepare("UPDATE users SET username = ?, email = ?, password = ?, profile_image = ?, phone_number = ?, address = ? WHERE user_id = ?");
         $statement->execute([
-            $user->name,
+            $user->username,
+            $user->email,
             $user->password,
-            $user->id
+            $user->profile_image,
+            $user->phone_number,
+            $user->address,
         ]);
         return $user;
     }
 
-    public function findById(string $id): ?User
+    public function findById(string $user_id): ?User
     {
-        $statement = $this->connection->prepare("SELECT id, name, password FROM users WHERE id = ?");
-        $statement->execute([$id]);
+        $statement = $this->connection->prepare("SELECT user_id, username, password FROM users WHERE user_id = ?");
+        $statement->execute([$user_id]);
 
         try {
             if ($row = $statement->fetch()) {
                 $user = new User();
-                $user->id = $row['id'];
-                $user->name = $row['name'];
+                $user->user_id = $row['user_id'];
+                $user->username = $row['username'];
                 $user->password = $row['password'];
                 return $user;
             } else {
@@ -54,6 +60,25 @@ class UserRepository
             $statement->closeCursor();
         }
     }
+
+    public function findByEmail(string $email): ?User {
+        $statement = $this->connection->prepare("SELECT user_id, username, password FROM users WHERE email = ?");
+        $statement->execute([$email]);
+        try {
+            if ($row = $statement->fetch()) {
+                $user = new User();
+                $user->user_id = $row['user_id'];
+                $user->username = $row['username'];
+                $user->password = $row['password'];
+                return $user;
+            } else {
+                return null;
+            }
+        } finally {
+            $statement->closeCursor();
+        }
+    }
+
 
     public function deleteAll(): void
     {

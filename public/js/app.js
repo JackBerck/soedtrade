@@ -49,3 +49,4 @@ const truncateDescription = (description) => {
 getDescription.forEach((description) => {
   description.innerText = truncateDescription(description.innerText);
 });
+

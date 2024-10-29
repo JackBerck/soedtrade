@@ -30,20 +30,17 @@ class UserService
 
         try {
             Database::beginTransaction();
-            $user = $this->userRepository->findById($request->user_id);
-            if ($user != null) {
-                throw new ValidationException("User Id already exists");
+            if ($this->userRepository->findByEmail($request->email) != null) {
+                throw new ValidationException("Akun sudah terdaftar dengan email ini");
             }
 
             $user = new User();
-            $user->user_id = $request->user_id;
             $user->username = $request->username;
             $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
             $user->profile_image = $request->profile_image;
             $user->phone_number = $request->phone_number;
             $user->address = $request->address;
-            $user->created_at = date("Y-m-d H:i:s");
 
             $this->userRepository->save($user);
 
@@ -61,9 +58,9 @@ class UserService
     private function validateUserRegistrationRequest(UserRegisterRequest $request)
     {
         if (
-            $request->user_id == null || $request->username == null || $request->password == null || $request->email == null || $request->profile_image == null || $request->phone_number == null || $request->address == null || trim($request->user_id) == "" || trim($request->username) == "" || trim($request->password) == "" || trim($request->email) == "" || trim($request->profile_image) == "" || trim($request->phone_number) == "" || trim($request->address) == ""
+            $request->username == null || $request->password == null || $request->email == null || $request->phone_number == null || $request->address == null || trim($request->username) == "" || trim($request->password) == "" || trim($request->email) == "" || trim($request->phone_number) == "" || trim($request->address) == ""
         ) {
-            throw new ValidationException("Name, Email, Password, Phone Number, Address Can Not Blank");
+            throw new ValidationException("Nama, email, password, nomor handphone, dan alamat tidak boleh kosong");
         }
     }
 
@@ -71,9 +68,9 @@ class UserService
     {
         $this->validateUserLoginRequest($request);
 
-        $user = $this->userRepository->findById($request->user_id);
+        $user = $this->userRepository->findByEmail($request->email);
         if ($user == null) {
-            throw new ValidationException("Id or password is wrong");
+            throw new ValidationException("Email atau password salah");
         }
 
         if (password_verify($request->password, $user->password)) {
@@ -81,17 +78,16 @@ class UserService
             $response->user = $user;
             return $response;
         } else {
-            throw new ValidationException("Id or password is wrong");
+            throw new ValidationException("Email atau password salah");
         }
     }
 
     private function validateUserLoginRequest(UserLoginRequest $request)
     {
         if (
-            $request->id == null || $request->password == null ||
-            trim($request->id) == "" || trim($request->password) == ""
+            $request->email == null || $request->password == null || trim($request->email) == "" || trim($request->password) == ""
         ) {
-            throw new ValidationException("Id, Password can not blank");
+            throw new ValidationException("Email dan password tidak boleh kosong");
         }
     }
 

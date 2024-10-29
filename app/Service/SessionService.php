@@ -21,11 +21,11 @@ class SessionService
         $this->userRepository = $userRepository;
     }
 
-    public function create(string $userId): Session
+    public function create(string $userEmail): Session
     {
         $session = new Session();
         $session->id = uniqid();
-        $session->userId = $userId;
+        $session->userId = $userEmail;
 
         $this->sessionRepository->save($session);
 
