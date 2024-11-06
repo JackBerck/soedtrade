@@ -29,6 +29,24 @@ class UserController
         $this->sessionService = new SessionService($sessionRepository, $userRepository);
     }
 
+    function index(): void
+    {
+        $user = $this->sessionService->current();
+
+        $model = ["title" => "Profil"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "email" => $user->email,
+                "phone_number" => $user->phone_number,
+                "address" => $user->address,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        View::render('User/index', model: $model);
+    }
+
     public function register()
     {
         View::render('User/register', [
@@ -88,44 +106,27 @@ class UserController
         View::redirect("/");
     }
 
-    public function updateProfile()
-    {
-        $user = $this->sessionService->current();
-
-        View::render('User/profile', [
-            "title" => "Perbarui Profil",
-            "user" => [
-                "username" => $user->username,
-                "email" => $user->email,
-                "phone_number" => $user->phone_number,
-                "address" => $user->address,
-                "profile_image" => $user->profile_image
-            ]
-        ]);
-    }
-
-    public function postUpdateProfile()
+    public function postUpdateProfile(): void
     {
         $user = $this->sessionService->current();
 
         $request = new UserProfileUpdateRequest();
         $request->user_id = $user->user_id;
         $request->username = $_POST['username'];
-        $request->email = $_POST['email'];
-        $request->profile_image = $_POST['profile_image'];
-        $request->phone_number = $_POST['phone_number'];
         $request->address = $_POST['address'];
 
         try {
             $this->userService->updateProfile($request);
-            View::redirect('/');
+            View::redirect('/users');
         } catch (ValidationException $exception) {
-            View::render('User/profile', [
-                "title" => "Perbarui Profil",
-                "error" => $exception->getMessage(),
+            View::render('User/index', [
+                "title" => "Profil",
                 "user" => [
-                    "id" => $user->user_id,
-                    "name" => $_POST['name']
+                    "username" => $user->username,
+                    "email" => $user->email,
+                    "phone_number" => $user->phone_number,
+                    "address" => $user->address,
+                    "profile_image" => $user->profile_image
                 ]
             ]);
         }

@@ -38,7 +38,11 @@ class UserService
             $user->username = $request->username;
             $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
-            $user->profile_image = $request->profile_image;
+            if ($request->profile_image == NULL) {
+                $user->profile_image = "default.webp";
+            } else {
+                $user->profile_image = $request->profile_image;
+            }
             $user->phone_number = $request->phone_number;
             $user->address = $request->address;
 
@@ -104,9 +108,6 @@ class UserService
             }
 
             $user->username = $request->username;
-            $user->email = $request->email;
-            $user->profile_image = $request->profile_image;
-            $user->phone_number = $request->phone_number;
             $user->address = $request->address;
             $this->userRepository->update($user);
 
@@ -124,9 +125,9 @@ class UserService
     private function validateUserProfileUpdateRequest(UserProfileUpdateRequest $request)
     {
         if (
-            $request->user_id == null || $request->username == null || $request->email == null || $request->profile_image == null || $request->phone_number == null || $request->address == null || trim($request->user_id) == "" || trim($request->username) == "" || trim($request->email) == "" || trim($request->profile_image) == "" || trim($request->phone_number) == "" || trim($request->address) == ""
+            $request->username == null || $request->address == null || trim($request->username) == "" || trim($request->address) == ""
         ) {
-            throw new ValidationException("Id, Name can not blank");
+            throw new ValidationException("Nama dan alamat tidak boleh kosong");
         }
     }
 

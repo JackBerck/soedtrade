@@ -1,8 +1,13 @@
 {
   "devDependencies": {
+    "@prettier/plugin-php": "^0.22.2",
+    "prettier": "^3.3.3",
     "tailwindcss": "^3.4.14"
   },
   "scripts": {
     "dev": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
-  }
+  },
+  "plugins": [
+    "@prettier/plugin-php"
+  ]
 }

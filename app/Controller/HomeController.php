@@ -22,20 +22,18 @@ class HomeController
     }
 
 
-    function index()
+    function index() :void
     {
         $user = $this->sessionService->current();
-        if ($user == null) {
-            View::render('Home/index', [
-                "title" => "PHP Login Management"
-            ]);
-        } else {
-            View::render('Home/dashboard', [
-                "title" => "Dashboard",
-                "user" => [
-                    "name" => $user->name
-                ]
-            ]);
+
+        $model = ["title" => "Beranda"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
         }
+
+        View::render('Home/index', model: $model);
     }
 }

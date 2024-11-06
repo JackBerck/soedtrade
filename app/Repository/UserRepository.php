@@ -29,21 +29,18 @@ class UserRepository
 
     public function update(User $user): User
     {
-        $statement = $this->connection->prepare("UPDATE users SET username = ?, email = ?, password = ?, profile_image = ?, phone_number = ?, address = ? WHERE user_id = ?");
+        $statement = $this->connection->prepare("UPDATE users SET username = ?, address = ? WHERE user_id = ?");
         $statement->execute([
             $user->username,
-            $user->email,
-            $user->password,
-            $user->profile_image,
-            $user->phone_number,
             $user->address,
+            $user->user_id
         ]);
         return $user;
     }
 
     public function findById(string $user_id): ?User
     {
-        $statement = $this->connection->prepare("SELECT user_id, username, password FROM users WHERE user_id = ?");
+        $statement = $this->connection->prepare("SELECT user_id, username, password, email, phone_number, address, profile_image, created_at FROM users WHERE user_id = ?");
         $statement->execute([$user_id]);
 
         try {
@@ -52,6 +49,11 @@ class UserRepository
                 $user->user_id = $row['user_id'];
                 $user->username = $row['username'];
                 $user->password = $row['password'];
+                $user->email = $row['email'];
+                $user->phone_number = $row['phone_number'];
+                $user->address = $row['address'];
+                $user->profile_image = $row['profile_image'];
+                $user->created_at = $row['created_at'];
                 return $user;
             } else {
                 return null;
@@ -61,8 +63,9 @@ class UserRepository
         }
     }
 
-    public function findByEmail(string $email): ?User {
-        $statement = $this->connection->prepare("SELECT user_id, username, password FROM users WHERE email = ?");
+    public function findByEmail(string $email): ?User
+    {
+        $statement = $this->connection->prepare("SELECT user_id, username, password, email, phone_number, address, profile_image FROM users WHERE email = ?");
         $statement->execute([$email]);
         try {
             if ($row = $statement->fetch()) {
@@ -70,6 +73,10 @@ class UserRepository
                 $user->user_id = $row['user_id'];
                 $user->username = $row['username'];
                 $user->password = $row['password'];
+                $user->email = $row['email'];
+                $user->phone_number = $row['phone_number'];
+                $user->address = $row['address'];
+                $user->profile_image = $row['profile_image'];
                 return $user;
             } else {
                 return null;
