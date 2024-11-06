@@ -7,7 +7,6 @@ use JackBerck\SoedTrade\Config\Database;
 use JackBerck\SoedTrade\Domain\User;
 use JackBerck\SoedTrade\Exception\ValidationException;
 use JackBerck\SoedTrade\Model\UserLoginRequest;
-use JackBerck\SoedTrade\Model\UserPasswordUpdateRequest;
 use JackBerck\SoedTrade\Model\UserProfileUpdateRequest;
 use JackBerck\SoedTrade\Model\UserRegisterRequest;
 use JackBerck\SoedTrade\Repository\SessionRepository;
@@ -162,66 +161,5 @@ class UserServiceTest extends TestCase
         $request->name = "Budi";
 
         $this->userService->updateProfile($request);
-    }
-
-    public function testUpdatePasswordSuccess()
-    {
-        $user = new User();
-        $user->id = "eko";
-        $user->name = "Eko";
-        $user->password = password_hash("eko", PASSWORD_BCRYPT);
-        $this->userRepository->save($user);
-
-        $request = new UserPasswordUpdateRequest();
-        $request->id = "eko";
-        $request->oldPassword = "eko";
-        $request->newPassword = "new";
-
-        $this->userService->updatePassword($request);
-
-        $result = $this->userRepository->findById($user->id);
-        self::assertTrue(password_verify($request->newPassword, $result->password));
-    }
-
-    public function testUpdatePasswordValidationError()
-    {
-        $this->expectException(ValidationException::class);
-
-        $request = new UserPasswordUpdateRequest();
-        $request->id = "eko";
-        $request->oldPassword = "";
-        $request->newPassword = "";
-
-        $this->userService->updatePassword($request);
-    }
-
-    public function testUpdatePasswordWrongOldPassword()
-    {
-        $this->expectException(ValidationException::class);
-
-        $user = new User();
-        $user->id = "eko";
-        $user->name = "Eko";
-        $user->password = password_hash("eko", PASSWORD_BCRYPT);
-        $this->userRepository->save($user);
-
-        $request = new UserPasswordUpdateRequest();
-        $request->id = "eko";
-        $request->oldPassword = "salah";
-        $request->newPassword = "new";
-
-        $this->userService->updatePassword($request);
-    }
-
-    public function testUpdatePasswordNotFound()
-    {
-        $this->expectException(ValidationException::class);
-
-        $request = new UserPasswordUpdateRequest();
-        $request->id = "eko";
-        $request->oldPassword = "eko";
-        $request->newPassword = "new";
-
-        $this->userService->updatePassword($request);
     }
 }

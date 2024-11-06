@@ -6,7 +6,6 @@ use JackBerck\SoedTrade\App\View;
 use JackBerck\SoedTrade\Config\Database;
 use JackBerck\SoedTrade\Exception\ValidationException;
 use JackBerck\SoedTrade\Model\UserLoginRequest;
-use JackBerck\SoedTrade\Model\UserPasswordUpdateRequest;
 use JackBerck\SoedTrade\Model\UserProfileUpdateRequest;
 use JackBerck\SoedTrade\Model\UserRegisterRequest;
 use JackBerck\SoedTrade\Repository\SessionRepository;
@@ -127,39 +126,6 @@ class UserController
                     "phone_number" => $user->phone_number,
                     "address" => $user->address,
                     "profile_image" => $user->profile_image
-                ]
-            ]);
-        }
-    }
-
-    public function updatePassword()
-    {
-        $user = $this->sessionService->current();
-        View::render('User/password', [
-            "title" => "Update user password",
-            "user" => [
-                "id" => $user->user_id
-            ]
-        ]);
-    }
-
-    public function postUpdatePassword()
-    {
-        $user = $this->sessionService->current();
-        $request = new UserPasswordUpdateRequest();
-        $request->user_id = $user->user_id;
-        $request->oldPassword = $_POST['oldPassword'];
-        $request->newPassword = $_POST['newPassword'];
-
-        try {
-            $this->userService->updatePassword($request);
-            View::redirect('/');
-        } catch (ValidationException $exception) {
-            View::render('User/password', [
-                "title" => "Update user password",
-                "error" => $exception->getMessage(),
-                "user" => [
-                    "id" => $user->user_id
                 ]
             ]);
         }

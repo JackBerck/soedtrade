@@ -7,8 +7,6 @@ use JackBerck\SoedTrade\Domain\User;
 use JackBerck\SoedTrade\Exception\ValidationException;
 use JackBerck\SoedTrade\Model\UserLoginRequest;
 use JackBerck\SoedTrade\Model\UserLoginResponse;
-use JackBerck\SoedTrade\Model\UserPasswordUpdateRequest;
-use JackBerck\SoedTrade\Model\UserPasswordUpdateResponse;
 use JackBerck\SoedTrade\Model\UserProfileUpdateRequest;
 use JackBerck\SoedTrade\Model\UserProfileUpdateResponse;
 use JackBerck\SoedTrade\Model\UserRegisterRequest;
@@ -128,46 +126,6 @@ class UserService
             $request->username == null || $request->address == null || trim($request->username) == "" || trim($request->address) == ""
         ) {
             throw new ValidationException("Nama dan alamat tidak boleh kosong");
-        }
-    }
-
-    public function updatePassword(UserPasswordUpdateRequest $request): UserPasswordUpdateResponse
-    {
-        $this->validateUserPasswordUpdateRequest($request);
-
-        try {
-            Database::beginTransaction();
-
-            $user = $this->userRepository->findById($request->user_id);
-            if ($user == null) {
-                throw new ValidationException("User is not found");
-            }
-
-            if (!password_verify($request->oldPassword, $user->password)) {
-                throw new ValidationException("Old password is wrong");
-            }
-
-            $user->password = password_hash($request->newPassword, PASSWORD_BCRYPT);
-            $this->userRepository->update($user);
-
-            Database::commitTransaction();
-
-            $response = new UserPasswordUpdateResponse();
-            $response->user = $user;
-            return $response;
-        } catch (\Exception $exception) {
-            Database::rollbackTransaction();
-            throw $exception;
-        }
-    }
-
-    private function validateUserPasswordUpdateRequest(UserPasswordUpdateRequest $request)
-    {
-        if (
-            $request->user_id == null || $request->oldPassword == null || $request->newPassword == null ||
-            trim($request->user_id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""
-        ) {
-            throw new ValidationException("Old Password, New Password can not blank");
         }
     }
 }

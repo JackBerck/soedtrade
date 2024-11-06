@@ -4,7 +4,6 @@ namespace JackBerck\SoedTrade\App;
 
 class Router
 {
-
     private static array $routes = [];
 
     public static function add(
@@ -13,7 +12,8 @@ class Router
         string $controller,
         string $function,
         array  $middlewares = []
-    ): void {
+    ): void
+    {
         self::$routes[] = [
             'method' => $method,
             'path' => $path,
