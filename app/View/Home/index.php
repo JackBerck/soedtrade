@@ -20,7 +20,7 @@ $products = [
         "title" => "Honda Grand Astrea 96",
         "price" => 5000000,
         "description" =>
-        "Motor Honda Grand Astrea 96 dengan kondisi bagus, mesin halus, dan siap pakai.",
+            "Motor Honda Grand Astrea 96 dengan kondisi bagus, mesin halus, dan siap pakai.",
         "condition" => "Bekas",
         "category" => "Motor",
     ],
@@ -29,7 +29,7 @@ $products = [
         "title" => "Honda Goldwing",
         "price" => 100000000,
         "description" =>
-        "Motor Honda Goldwing dengan kondisi bagus layak pakai dan siap touring.",
+            "Motor Honda Goldwing dengan kondisi bagus layak pakai dan siap touring.",
         "condition" => "Bekas",
         "category" => "Motor",
     ],
@@ -38,7 +38,7 @@ $products = [
         "title" => "Lenovo Yoga Pro 9",
         "price" => 15000000,
         "description" =>
-        "Laptop Lenovo Yoga Pro 9 dengan spesifikasi tinggi, layar touchscreen, dan ringan.",
+            "Laptop Lenovo Yoga Pro 9 dengan spesifikasi tinggi, layar touchscreen, dan ringan.",
         "condition" => "Bekas",
         "category" => "Laptop",
     ],
@@ -47,7 +47,7 @@ $products = [
         "title" => "Asus ROG Phone 2",
         "price" => 8000000,
         "description" =>
-        "Handphone Asus ROG Phone 2 dengan spesifikasi gaming, layar 120Hz, dan performa tinggi.",
+            "Handphone Asus ROG Phone 2 dengan spesifikasi gaming, layar 120Hz, dan performa tinggi.",
         "condition" => "Bekas",
         "category" => "Handphone",
     ],
@@ -56,7 +56,7 @@ $products = [
         "title" => "Sony A7 Mark 2",
         "price" => 12000000,
         "description" =>
-        "Kamera Sony A7 Mark 2 dengan kualitas gambar tinggi, full frame, dan performa tinggi.",
+            "Kamera Sony A7 Mark 2 dengan kualitas gambar tinggi, full frame, dan performa tinggi.",
         "condition" => "Bekas",
         "category" => "Kamera",
     ],
@@ -65,7 +65,7 @@ $products = [
         "title" => "TUF Gaming",
         "price" => 20000000,
         "description" =>
-        "Laptop TUF Gaming dengan spesifikasi tinggi, performa tinggi, dan tahan lama.",
+            "Laptop TUF Gaming dengan spesifikasi tinggi, performa tinggi, dan tahan lama.",
         "condition" => "Bekas",
         "category" => "Laptop",
     ],
@@ -79,9 +79,9 @@ $products = [
             <?php foreach ($slides as $slide): ?>
                 <div class="swiper-slide">
                     <img
-                        src="<?= $slide['image']; ?>"
-                        alt="<?= $slide['title']; ?>"
-                        class="w-full object-cover rounded-lg" />
+                            src="<?= $slide['image']; ?>"
+                            alt="<?= $slide['title']; ?>"
+                            class="w-full object-cover rounded-lg"/>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -98,75 +98,82 @@ $products = [
         <form class="max-w-2xl mb-4">
             <div class="flex relative">
                 <button
-                    id="dropdown-button"
-                    data-dropdown-toggle="dropdown"
-                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-base bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none"
-                    type="button">Semua kategori <svg
-                        class="w-2.5 h-2.5 ms-2.5"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6">
+                        id="dropdown-button"
+                        data-dropdown-toggle="dropdown"
+                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-base bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none"
+                        type="button">Semua kategori
+                    <svg
+                            class="w-2.5 h-2.5 ms-2.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6">
                         <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="m1 1 4 4 4-4"></path>
-                    </svg></button>
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m1 1 4 4 4-4"></path>
+                    </svg>
+                </button>
                 <div
-                    id="dropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute top-12">
+                        id="dropdown"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute top-12">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
                         <li>
                             <button
-                                type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Elektronik</button>
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Elektronik
+                            </button>
                         </li>
                         <li>
                             <button
-                                type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Kendaraan</button>
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Kendaraan
+                            </button>
                         </li>
                         <li>
                             <button
-                                type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Alat musik</button>
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Alat musik
+                            </button>
                         </li>
                         <li>
                             <button
-                                type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Pakaian</button>
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Pakaian
+                            </button>
                         </li>
                         <li>
                             <button
-                                type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Hobi & hiburan</button>
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Hobi & hiburan
+                            </button>
                         </li>
                     </ul>
                 </div>
                 <div class="relative w-full">
                     <input
-                        type="search"
-                        id="search-dropdown"
-                        class="block p-2.5 w-full z-20 text-sm focus:outline-none text-dark-base bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
-                        placeholder="Cari barang elektronik, kendaraan, dan lainnya"
-                        required />
+                            type="search"
+                            id="search-dropdown"
+                            class="block p-2.5 w-full z-20 text-sm focus:outline-none text-dark-base bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
+                            placeholder="Cari barang elektronik, kendaraan, dan lainnya"
+                            required/>
                     <button
-                        type="submit"
-                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800">
+                            type="submit"
+                            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800">
                         <svg
-                            class="w-4 h-4"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 20 20">
+                                class="w-4 h-4"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 20">
                             <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
                         </svg>
                         <span class="sr-only">Search</span>
                     </button>
@@ -174,14 +181,14 @@ $products = [
             </div>
         </form>
         <div
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-between">
+                class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-between">
             <?php foreach ($products as $index => $product): ?>
                 <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow">
                     <a href="product?id=<?= $index; ?>">
                         <img
-                            class="rounded-t-lg object-cover w-full"
-                            src="<?= $product['image']; ?>"
-                            alt="<?= $product['title']; ?> foto" />
+                                class="rounded-t-lg object-cover w-full"
+                                src="<?= $product['image']; ?>"
+                                alt="<?= $product['title']; ?> foto"/>
                     </a>
                     <div class="p-3">
                         <a href="product?id=<?= $index; ?>">
@@ -200,6 +207,21 @@ $products = [
             <?php endforeach; ?>
         </div>
     </div>
-    <AddProduct />
+    <a
+            href="/users/tambah-barang"
+            class="fixed bottom-8 right-8 p-3 md:p-4 rounded-full ring-4 ring-blue-base bg-light-base"
+    >
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                class="w-5 h-5 md:w-8 md:h-8"
+                fill="currentColor"
+        >
+            <path
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+            ></path>
+        </svg
+        >
+    </a>
 </div>
 <!-- Product List End -->

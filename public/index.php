@@ -26,5 +26,7 @@ Router::add('GET', '/about-us', \JackBerck\SoedTrade\Controller\AboutUsControlle
 Router::add('GET', '/contact-us', \JackBerck\SoedTrade\Controller\ContactUsController::class, 'index', []);
 Router::add('GET', '/users', \JackBerck\SoedTrade\Controller\UserController::class, 'index', [MustLoginMiddleware::class]);
 Router::add("POST", "/users", \JackBerck\SoedTrade\Controller\UserController::class, "postUpdateProfile", [MustLoginMiddleware::class]);
+Router::add('GET', "/users/tambah-barang", \JackBerck\SoedTrade\Controller\UserController::class, "addProduct", [MustLoginMiddleware::class]);
+Router::add('POST', "/users/tambah-barang", \JackBerck\SoedTrade\Controller\UserController::class, "postAddProduct", [MustLoginMiddleware::class]);
 
 Router::run();

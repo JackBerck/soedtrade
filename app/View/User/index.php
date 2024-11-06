@@ -46,7 +46,7 @@ $user = $model["user"] ?? null;
                 </div>
             </aside>
             <form
-                    id="updateForm" action="/users" method="post" enctype="multipart/form-data"
+                    action="/users" method="post" enctype="multipart/form-data"
                     class="small-font-size flex flex-col gap-4 mb-4 w-full max-w-lg"
             >
                 <div class="flex items-center gap-4">

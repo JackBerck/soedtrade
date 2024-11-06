@@ -12,6 +12,7 @@ use JackBerck\SoedTrade\Repository\SessionRepository;
 use JackBerck\SoedTrade\Repository\UserRepository;
 use JackBerck\SoedTrade\Service\SessionService;
 use JackBerck\SoedTrade\Service\UserService;
+use JackBerck\SoedTrade\Model\ProductAddRequest;
 
 class UserController
 {
@@ -127,6 +128,54 @@ class UserController
                     "address" => $user->address,
                     "profile_image" => $user->profile_image
                 ]
+            ]);
+        }
+    }
+
+    public function addProduct()
+    {
+        $user = $this->sessionService->current();
+
+        $model = ["title" => "Tambah Barang"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "email" => $user->email,
+                "phone_number" => $user->phone_number,
+                "address" => $user->address,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        View::render('User/tambah-barang', model: $model);
+    }
+
+    public function postAddProduct(): void
+    {
+        $user = $this->sessionService->current();
+
+        $request = new ProductAddRequest();
+        $request->seller_id = $user->user_id;
+        $request->name = $_POST['name'];
+        $request->price = $_POST['price'];
+        $request->condition = $_POST['condition'];
+        $request->category = $_POST['category'];
+        $request->description = $_POST['description'];
+
+        try {
+            $this->userService->addProduct($request);
+            View::redirect('/');
+        } catch (ValidationException $exception) {
+            View::render('User/tambah-barang', [
+                "title" => "Tambah Barang",
+                "user" => [
+                    "username" => $user->username,
+                    "email" => $user->email,
+                    "phone_number" => $user->phone_number,
+                    "address" => $user->address,
+                    "profile_image" => $user->profile_image,
+                ],
+                "error" => $exception->getMessage()
             ]);
         }
     }
