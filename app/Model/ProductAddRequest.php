@@ -11,4 +11,5 @@ class ProductAddRequest
     public ?string $condition = null;
     public ?string $category = null;
     public ?string $description = null;
+    public ?array $images = null;
 }

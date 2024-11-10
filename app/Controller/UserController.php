@@ -10,14 +10,19 @@ use JackBerck\SoedTrade\Model\UserProfileUpdateRequest;
 use JackBerck\SoedTrade\Model\UserRegisterRequest;
 use JackBerck\SoedTrade\Repository\SessionRepository;
 use JackBerck\SoedTrade\Repository\UserRepository;
+use JackBerck\SoedTrade\Repository\ProductRepository;
+use JackBerck\SoedTrade\Repository\ProductImagesRepository;
 use JackBerck\SoedTrade\Service\SessionService;
 use JackBerck\SoedTrade\Service\UserService;
+use JackBerck\SoedTrade\Service\ProductService;
 use JackBerck\SoedTrade\Model\ProductAddRequest;
 
 class UserController
 {
     private UserService $userService;
     private SessionService $sessionService;
+    private ProductService $productService;
+
 
     public function __construct()
     {
@@ -27,6 +32,10 @@ class UserController
 
         $sessionRepository = new SessionRepository($connection);
         $this->sessionService = new SessionService($sessionRepository, $userRepository);
+
+        $productRepository = new ProductRepository($connection);
+        $productImageRepository = new ProductImagesRepository($connection);
+        $this->productService = new ProductService($productRepository, $productImageRepository);
     }
 
     function index(): void
@@ -158,12 +167,18 @@ class UserController
         $request->seller_id = $user->user_id;
         $request->name = $_POST['name'];
         $request->price = $_POST['price'];
+        $request->description = $_POST['description'];
         $request->condition = $_POST['condition'];
         $request->category = $_POST['category'];
-        $request->description = $_POST['description'];
+
+        if (isset($_FILES['images'])) {
+            $request->images = $_FILES['images'];
+        } else {
+            $request->images = [];
+        }
 
         try {
-            $this->userService->addProduct($request);
+            $this->productService->addProduct($request);
             View::redirect('/');
         } catch (ValidationException $exception) {
             View::render('User/tambah-barang', [
@@ -177,6 +192,7 @@ class UserController
                 ],
                 "error" => $exception->getMessage()
             ]);
+            echo $exception->getMessage();
         }
     }
 }
