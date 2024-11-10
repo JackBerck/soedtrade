@@ -5,7 +5,7 @@ namespace JackBerck\SoedTrade\Domain;
 class Product
 {
     public ?int $product_id = null;
-    public string $seller_id;
+    public ?string $seller_id;
     public string $name;
     public string $price;
     public string $condition;

@@ -14,62 +14,8 @@ $slides = [
     ],
 ];
 
-$products = [
-    [
-        "image" => "/images/products/grand-astrea-96.jpg",
-        "title" => "Honda Grand Astrea 96",
-        "price" => 5000000,
-        "description" =>
-            "Motor Honda Grand Astrea 96 dengan kondisi bagus, mesin halus, dan siap pakai.",
-        "condition" => "Bekas",
-        "category" => "Motor",
-    ],
-    [
-        "image" => "/images/products/honda-goldwing.jpg",
-        "title" => "Honda Goldwing",
-        "price" => 100000000,
-        "description" =>
-            "Motor Honda Goldwing dengan kondisi bagus layak pakai dan siap touring.",
-        "condition" => "Bekas",
-        "category" => "Motor",
-    ],
-    [
-        "image" => "/images/products/lenovo-yoga-pro-9.jpg",
-        "title" => "Lenovo Yoga Pro 9",
-        "price" => 15000000,
-        "description" =>
-            "Laptop Lenovo Yoga Pro 9 dengan spesifikasi tinggi, layar touchscreen, dan ringan.",
-        "condition" => "Bekas",
-        "category" => "Laptop",
-    ],
-    [
-        "image" => "/images/products/rog-phone-2.jpg",
-        "title" => "Asus ROG Phone 2",
-        "price" => 8000000,
-        "description" =>
-            "Handphone Asus ROG Phone 2 dengan spesifikasi gaming, layar 120Hz, dan performa tinggi.",
-        "condition" => "Bekas",
-        "category" => "Handphone",
-    ],
-    [
-        "image" => "/images/products/sony-a7-mark-2.jpg",
-        "title" => "Sony A7 Mark 2",
-        "price" => 12000000,
-        "description" =>
-            "Kamera Sony A7 Mark 2 dengan kualitas gambar tinggi, full frame, dan performa tinggi.",
-        "condition" => "Bekas",
-        "category" => "Kamera",
-    ],
-    [
-        "image" => "/images/products/tuf-gaming.jpg",
-        "title" => "TUF Gaming",
-        "price" => 20000000,
-        "description" =>
-            "Laptop TUF Gaming dengan spesifikasi tinggi, performa tinggi, dan tahan lama.",
-        "condition" => "Bekas",
-        "category" => "Laptop",
-    ],
-];
+$products = $model["products"] ?? [];
+$productsImage = $model["productsImage"] ?? [];
 ?>
 
 <!-- Swiper Slider Start -->
@@ -95,12 +41,12 @@ $products = [
 <!-- Product List Start -->
 <div class="pt-8 pb-8 section-padding-x">
     <div class="container max-w-screen-xl">
-        <form class="max-w-2xl mb-4">
+        <form class="max-w-2xl mb-4 small-font-size">
             <div class="flex relative">
                 <button
                         id="dropdown-button"
                         data-dropdown-toggle="dropdown"
-                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-base bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none"
+                        class="flex-shrink-0 z-10 inline-flex items-center px-2 md:py-2.5 md:px-4 font-medium text-center text-dark-base bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none"
                         type="button">Semua kategori
                     <svg
                             class="w-2.5 h-2.5 ms-2.5"
@@ -119,7 +65,7 @@ $products = [
                 <div
                         id="dropdown"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute top-12">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
+                    <ul class="py-2 text-gray-700" aria-labelledby="dropdown-button">
                         <li>
                             <button
                                     type="button"
@@ -156,12 +102,12 @@ $products = [
                     <input
                             type="search"
                             id="search-dropdown"
-                            class="block p-2.5 w-full z-20 text-sm focus:outline-none text-dark-base bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
+                            class="block p-2.5 w-full z-20 focus:outline-none text-dark-base bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
                             placeholder="Cari barang elektronik, kendaraan, dan lainnya"
                             required/>
                     <button
                             type="submit"
-                            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800">
+                            class="absolute top-0 end-0 p-2.5 font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800">
                         <svg
                                 class="w-4 h-4"
                                 aria-hidden="true"
@@ -182,29 +128,35 @@ $products = [
         </form>
         <div
                 class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-between">
-            <?php foreach ($products as $index => $product): ?>
-                <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow">
-                    <a href="product?id=<?= $index; ?>">
-                        <img
-                                class="rounded-t-lg object-cover w-full"
-                                src="<?= $product['image']; ?>"
-                                alt="<?= $product['title']; ?> foto"/>
-                    </a>
-                    <div class="p-3">
-                        <a href="product?id=<?= $index; ?>">
-                            <p class="price-title-font-size text-gray-700 price">
-                                <?= $product['price'] ?>
-                            </p>
-                            <h5 class="mb-2 card-title-font-size font-bold tracking-tight text-dark-base">
-                                <?= $product['title']; ?>
-                            </h5>
-                        </a>
-                        <p class="description-font-size font-normal text-gray-700 description">
-                            <?= $product['description'] ?>
-                        </p>
-                    </div>
+            <?php if (empty($products)): ?>
+                <div class="col-span-full text-center">
+                    <p class="text-gray-700">Tidak ada barang yang ditemukan</p>
                 </div>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($products as $index => $product): ?>
+                    <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow">
+                        <a href="product?id=<?= $index; ?>">
+                            <img
+                                    class="rounded-t-lg object-cover w-full h-24 md:h-48"
+                                    src="/images/products/<?= !empty($product->images) ? $product->images[0] : 'default-image.jpg'; ?>"
+                                    alt="<?= $product->name; ?> foto"/>
+                        </a>
+                        <div class="p-3">
+                            <a href="product?id=<?= $index; ?>">
+                                <p class="price-title-font-size text-gray-700 price">
+                                    <?= $product->price; ?>
+                                </p>
+                                <h5 class="mb-2 card-title-font-size font-bold tracking-tight text-dark-base title-product">
+                                    <?= $product->name; ?>
+                                </h5>
+                            </a>
+                            <p class="description-font-size font-normal text-gray-700 description">
+                                <?= $product->description; ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <a

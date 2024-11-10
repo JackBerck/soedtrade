@@ -10,7 +10,6 @@ use JackBerck\SoedTrade\Model\ProductAddResponse;
 use JackBerck\SoedTrade\Repository\ProductRepository;
 use JackBerck\SoedTrade\Repository\ProductImagesRepository;
 use JackBerck\SoedTrade\Domain\ProductImages;
-use function PHPUnit\Framework\isEmpty;
 
 class ProductService
 {
@@ -94,5 +93,10 @@ class ProductService
                 throw new ValidationException("Ukuran file terlalu besar, ukuran maksimum adalah 1MB");
             }
         }
+    }
+
+    public function findAll(): array
+    {
+        return $this->productRepository->findAll();
     }
 }

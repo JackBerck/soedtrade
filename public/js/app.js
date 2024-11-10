@@ -55,11 +55,18 @@ getPrice.forEach((price) => {
 });
 
 // Format truncate the description
+const getTitleProduct = document.querySelectorAll(".title-product");
+const truncateTitleProduct = (title) => {
+  return title.substring(0, 20) + "...";
+};
+getTitleProduct.forEach((title) => {
+  title.innerText = truncateTitleProduct(title.innerText);
+});
+
 const getDescription = document.querySelectorAll(".description");
 const truncateDescription = (description) => {
   return description.substring(0, 50) + "...";
 };
-
 getDescription.forEach((description) => {
   description.innerText = truncateDescription(description.innerText);
 });

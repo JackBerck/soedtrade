@@ -12,7 +12,7 @@ use JackBerck\SoedTrade\Middleware\MustLoginMiddleware;
 Database::getConnection('prod');
 
 // Home Controller
-Router::add('GET', '/', HomeController::class, 'index', []);
+Router::add('GET', '/', HomeController::class, 'index');
 
 // User Controller
 Router::add('GET', '/users/register', UserController::class, 'register', [MustNotLoginMiddleware::class]);
