@@ -4,6 +4,7 @@ namespace JackBerck\SoedTrade\Repository;
 
 use JackBerck\SoedTrade\Domain\Product;
 use JackBerck\SoedTrade\Domain\User;
+use JackBerck\SoedTrade\Model\ProductAddRequest;
 
 class ProductRepository
 {
@@ -29,7 +30,7 @@ class ProductRepository
         return $product;
     }
 
-    public function update(Product $product): Product
+    public function update(ProductAddRequest $product): ProductAddRequest
     {
         $statement = $this->connection->prepare("UPDATE products SET name = ?, price = ?, description = ?, `condition` = ?, category = ? WHERE product_id = ?");
         $statement->execute([

@@ -120,4 +120,9 @@ class ProductService
     {
         $this->productRepository->delete($id);
     }
+
+    public function updateProduct(ProductAddRequest $product): void
+    {
+        $this->productRepository->update($product);
+    }
 }

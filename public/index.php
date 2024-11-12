@@ -32,7 +32,8 @@ Router::add('POST', "/users/add-product", \JackBerck\SoedTrade\Controller\UserCo
 Router::add('GET', '/product/([0-9]*)', \JackBerck\SoedTrade\Controller\HomeController::class, 'product', []);
 Router::add('GET', '/users/manage-products', \JackBerck\SoedTrade\Controller\UserController::class, 'manageProducts', [MustLoginMiddleware::class]);
 Router::add('POST', '/users/manage-products/delete-product', \JackBerck\SoedTrade\Controller\UserController::class, 'deleteProduct', [MustLoginMiddleware::class]);
-Router::add('POST', '/users/manage-products/update-product/([0-9]*)', \JackBerck\SoedTrade\Controller\UserController::class, 'updateProduct', [MustLoginMiddleware::class]);
+Router::add('GET', '/users/manage-products/update-product/([0-9]*)', \JackBerck\SoedTrade\Controller\UserController::class, 'updateProduct', [MustLoginMiddleware::class]);
+Router::add('POST', '/users/manage-products/update-product/([0-9]*)', \JackBerck\SoedTrade\Controller\UserController::class, 'postUpdateProduct', [MustLoginMiddleware::class]);
 Router::add('GET', '/users/saved-products', \JackBerck\SoedTrade\Controller\UserController::class, 'savedProducts', [MustLoginMiddleware::class]);
 
 

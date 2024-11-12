@@ -229,4 +229,52 @@ class UserController
         $this->productService->deleteProduct($product_id);
         View::redirect('/users/manage-products');
     }
+
+    public function updateProduct($product_id): void
+    {
+        $user = $this->sessionService->current();
+        $product = $this->productService->findById($product_id);
+
+        $model = ["title" => "Ubah Barang"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        if ($product != null) {
+            $model["product"] = $product;
+        }
+
+        View::render('User/update-product', model: $model);
+    }
+
+    public function postUpdateProduct($product_id): void
+    {
+        $user = $this->sessionService->current();
+
+        $request = new ProductAddRequest();
+        $request->product_id = $product_id;
+        $request->seller_id = $user->user_id;
+        $request->name = $_POST['name'];
+        $request->price = $_POST['price'];
+        $request->description = $_POST['description'];
+        $request->condition = $_POST['condition'];
+        $request->category = $_POST['category'];
+
+        try {
+            $this->productService->updateProduct($request);
+            View::redirect('/users/manage-products');
+        } catch (ValidationException $exception) {
+            View::render('User/update-product', [
+                "title" => "Ubah Barang",
+                "user" => [
+                    "username" => $user->username,
+                    "profile_image" => $user->profile_image,
+                ],
+                "error" => $exception->getMessage()
+            ]);
+        }
+    }
 }
