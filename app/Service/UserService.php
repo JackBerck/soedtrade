@@ -98,7 +98,7 @@ class UserService
     public function updateProfile(UserProfileUpdateRequest $request): UserProfileUpdateResponse
     {
         $this->validateUserProfileUpdateRequest($request);
-        $pathImage = __DIR__ . "/../../public/images/profile/";
+        $pathImage = __DIR__ . "/../../public/images/profiles/";
 
         try {
             Database::beginTransaction();

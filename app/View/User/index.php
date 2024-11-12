@@ -52,15 +52,15 @@ $user = $model["user"] ?? null;
                 <div class="flex items-center gap-4">
                     <img
                             id="profilePreview"
-                            src="/images/profiles/<?= $user["profilePhoto"] ?? "default.webp" ?>"
+                            src="/images/profiles/<?= $user["profile_image"] ?? "default.webp" ?>"
                             alt="Foto profil <?= $user['username'] ?>"
-                            class="w-36 aspect-square rounded-full"
+                            class="w-36 aspect-square rounded-full object-cover"
                     />
                     <div class="flex flex-col gap-4">
                         <div class="bg-blue-base py-2 px-4 rounded-lg block">
-                            <label for="profilePhoto" class="font-semibold cursor-pointer text-light-base">
+                            <label for="profile_image" class="font-semibold cursor-pointer text-light-base">
                                 Ganti Foto Profil</label>
-                            <input type="file" name="profile_image" id="profilePhoto" class="hidden"
+                            <input type="file" name="profile_image" id="profile_image" class="hidden"
                                    onchange="previewProfilePhoto()"/>
                         </div>
                     </div>
@@ -130,7 +130,7 @@ $user = $model["user"] ?? null;
 
 <script>
     function previewProfilePhoto() {
-        const fileInput = document.getElementById("profilePhoto");
+        const fileInput = document.getElementById("profile_image");
         const previewImage = document.getElementById("profilePreview");
 
         const file = fileInput.files[0];

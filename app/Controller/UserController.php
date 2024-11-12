@@ -123,7 +123,7 @@ class UserController
         $request->user_id = $user->user_id;
         $request->username = $_POST['username'];
         $request->address = $_POST['address'];
-        if (isset($_FILES['profilePhoto']) && $_FILES['profilePhoto']['error'] == UPLOAD_ERR_OK) {
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
             $request->profile_image = $_FILES['profile_image'];
         } else {
             $request->profile_image = null;
