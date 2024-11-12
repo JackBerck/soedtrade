@@ -3,62 +3,66 @@
 @tailwind utilities;
 
 .section-padding-x {
-  @apply px-4 md:px-8;
+    @apply px-4 md:px-8;
 }
 
 .card-title-font-size {
-  @apply text-base md:text-lg lg:text-xl;
+    @apply text-base md:text-lg lg:text-xl;
 }
 
 .price-title-font-size {
-  @apply text-sm md:text-base;
+    @apply text-sm md:text-base;
 }
 
 .description-font-size {
-  @apply text-xs md:text-sm;
+    @apply text-xs md:text-sm;
 }
 
 .title-font-size {
-  @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-3xl md:text-4xl lg:text-5xl;
 }
 
 .subtitle-font-size {
-  @apply text-base md:text-lg lg:text-xl;
+    @apply text-base md:text-lg lg:text-xl;
+}
+
+.product-title-font-size {
+    @apply text-lg md:text-xl lg:text-2xl;
 }
 
 .subheader-font-size {
-  @apply text-base sm:text-lg md:text-xl lg:text-2xl;
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl;
 }
 
 .normal-font-size {
-  @apply text-sm lg:text-base xl:text-lg;
+    @apply text-sm lg:text-base xl:text-lg;
 }
 
 .small-font-size {
-  @apply text-xs md:text-sm;
+    @apply text-xs md:text-sm;
 }
 
 .footer-font-size {
-  @apply text-sm md:text-base;
+    @apply text-sm md:text-base;
 }
 
 .swiper {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

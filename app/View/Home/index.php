@@ -135,7 +135,7 @@ $productsImage = $model["productsImage"] ?? [];
             <?php else: ?>
                 <?php foreach ($products as $index => $product): ?>
                     <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow">
-                        <a href="product?id=<?= $index; ?>">
+                        <a href="product/<?= $product->product_id; ?>">
                             <img
                                     class="rounded-t-lg object-cover w-full h-24 md:h-48"
                                     src="/images/products/<?= !empty($product->images) ? $product->images[0] : 'default-image.jpg'; ?>"
@@ -159,21 +159,85 @@ $productsImage = $model["productsImage"] ?? [];
             <?php endif; ?>
         </div>
     </div>
-    <a
-            href="/users/tambah-barang"
-            class="fixed bottom-8 right-8 p-3 md:p-4 rounded-full ring-4 ring-blue-base bg-light-base"
-    >
-        <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                class="w-5 h-5 md:w-8 md:h-8"
-                fill="currentColor"
-        >
-            <path
-                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-            ></path>
-        </svg
-        >
-    </a>
 </div>
 <!-- Product List End -->
+
+<!-- Add Product Button Start -->
+<a
+        href="/users/add-product"
+        class="fixed bottom-8 right-8 p-3 md:p-4 rounded-full ring-4 ring-blue-base bg-light-base"
+>
+    <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            class="w-5 h-5 md:w-8 md:h-8"
+            fill="currentColor"
+    >
+        <path
+                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+        ></path>
+    </svg
+    >
+</a>
+<!-- Add Product Button End -->
+
+<script>
+    // Swiper slider for the homepage
+    let swiper = new Swiper(".mySwiper", {
+        pagination: {
+            clickable: true,
+            el: ".swiper-pagination",
+        },
+        loop: true,
+        autoplay: {
+            delay: 2500,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    // Dropdown menu for the category page
+    if (window.location.pathname === "/") {
+        const dropdownButton = document.getElementById("dropdown-button");
+        const dropdown = document.getElementById("dropdown");
+
+        dropdownButton.addEventListener("click", () => {
+            dropdown.classList.toggle("hidden");
+            dropdown.classList.toggle("block");
+        });
+    }
+
+    // Format the price to currency
+    const getPrice = document.querySelectorAll(".price");
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(price);
+    };
+    getPrice.forEach((price) => {
+        price.innerText = formatPrice(price.innerText);
+    });
+
+    // Format truncate the description
+    const getTitleProduct = document.querySelectorAll(".title-product");
+    const truncateTitleProduct = (title) => {
+        if (title.length <= 20) return title;
+        return title.substring(0, 20) + "...";
+    };
+    getTitleProduct.forEach((title) => {
+        title.innerText = truncateTitleProduct(title.innerText);
+    });
+
+    const getDescription = document.querySelectorAll(".description");
+    const truncateDescription = (description) => {
+        return description.substring(0, 50) + "...";
+    };
+    getDescription.forEach((description) => {
+        description.innerText = truncateDescription(description.innerText);
+    });
+</script>

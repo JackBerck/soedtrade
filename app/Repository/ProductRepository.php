@@ -3,6 +3,7 @@
 namespace JackBerck\SoedTrade\Repository;
 
 use JackBerck\SoedTrade\Domain\Product;
+use JackBerck\SoedTrade\Domain\User;
 
 class ProductRepository
 {
@@ -44,24 +45,34 @@ class ProductRepository
 
     public function findById(string $product_id): ?Product
     {
-        $statement = $this->connection->prepare("SELECT product_id, seller_id, name, price, description, `condition`, category, created_at FROM products WHERE product_id = ?");
+        $statement = $this->connection->prepare("
+        SELECT p.product_id, p.seller_id, p.name, p.price, p.description, p.condition, p.category, p.created_at, pi.image_name
+        FROM products p
+        LEFT JOIN product_images pi ON p.product_id = pi.product_id
+        WHERE p.product_id = ?
+    ");
         $statement->execute([$product_id]);
 
         try {
-            if ($row = $statement->fetch()) {
-                $product = new Product();
-                $product->product_id = $row['product_id'];
-                $product->seller_id = $row['seller_id'];
-                $product->name = $row['name'];
-                $product->price = $row['price'];
-                $product->description = $row['description'];
-                $product->condition = $row['condition'];
-                $product->category = $row['category'];
-                $product->created_at = $row['created_at'];
-                return $product;
-            } else {
-                return null;
+            $product = null;
+            while ($row = $statement->fetch()) {
+                if (!$product) {
+                    $product = new Product();
+                    $product->product_id = $row['product_id'];
+                    $product->seller_id = $row['seller_id'];
+                    $product->name = $row['name'];
+                    $product->price = $row['price'];
+                    $product->description = $row['description'];
+                    $product->condition = $row['condition'];
+                    $product->category = $row['category'];
+                    $product->created_at = $row['created_at'];
+                    $product->images = [];
+                }
+                if ($row['image_name']) {
+                    $product->images[] = $row['image_name'];
+                }
             }
+            return $product;
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -101,5 +112,35 @@ class ProductRepository
         }
 
         return array_values($data); // Mengembalikan array produk
+    }
+
+    public function findUserWhoPosted(string $product_id): ?User
+    {
+        $statement = $this->connection->prepare("
+        SELECT u.user_id, u.username, u.email, u.phone_number, u.address, u.profile_image, u.created_at
+        FROM users u
+        JOIN products p ON u.user_id = p.seller_id
+        WHERE p.product_id = ?
+    ");
+
+        $statement->execute([$product_id]);
+
+        try {
+            if ($row = $statement->fetch()) {
+                $user = new User();
+                $user->user_id = $row['user_id'];
+                $user->username = $row['username'];
+                $user->email = $row['email'];
+                $user->phone_number = $row['phone_number'];
+                $user->address = $row['address'];
+                $user->profile_image = $row['profile_image'];
+                $user->created_at = $row['created_at'];
+                return $user;
+            } else {
+                return null;
+            }
+        } finally {
+            $statement->closeCursor();
+        }
     }
 }

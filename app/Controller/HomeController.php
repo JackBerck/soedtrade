@@ -47,4 +47,25 @@ class HomeController
 
         View::render('Home/index', model: $model);
     }
+
+    function product($id): void
+    {
+        $user = $this->sessionService->current();
+
+        $model = ["title" => "Detail Produk"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        $product = $this->productService->findById($id);
+        $model["product"] = $product;
+
+        $userWhoPosted = $this->productService->findUserWhoPosted($id);
+        $model["userWhoPosted"] = $userWhoPosted;
+
+        View::render('Product/index', model: $model);
+    }
 }

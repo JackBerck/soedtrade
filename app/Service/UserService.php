@@ -98,17 +98,30 @@ class UserService
     public function updateProfile(UserProfileUpdateRequest $request): UserProfileUpdateResponse
     {
         $this->validateUserProfileUpdateRequest($request);
+        $pathImage = __DIR__ . "/../../public/images/profile/";
 
         try {
             Database::beginTransaction();
 
             $user = $this->userRepository->findById($request->user_id);
             if ($user == null) {
-                throw new ValidationException("User is not found");
+                throw new ValidationException("Pengguna tidak ditemukan");
             }
 
             $user->username = $request->username;
             $user->address = $request->address;
+            if ($user->profile_image != null && $request->profile_image != null) {
+                unlink($pathImage . $user->profile_image);
+            }
+
+            if ($request->profile_image && isset($request->profile_image['tmp_name'])) {
+                $extension = pathinfo($request->profile_image['name'], PATHINFO_EXTENSION);
+                $namePhoto = uniqid() . '.' . $extension;
+
+                move_uploaded_file($request->profile_image['tmp_name'], $pathImage . $namePhoto);
+
+                $user->profile_image = $namePhoto;
+            }
             $this->userRepository->update($user);
 
             Database::commitTransaction();
@@ -128,6 +141,10 @@ class UserService
             $request->username == null || $request->address == null || trim($request->username) == "" || trim($request->address) == ""
         ) {
             throw new ValidationException("Nama dan alamat tidak boleh kosong");
+        }
+
+        if ($request->profile_image != null && $request->profile_image['error'] != UPLOAD_ERR_OK) {
+            throw new ValidationException("Gagal mengupload gambar");
         }
     }
 }

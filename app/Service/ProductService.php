@@ -4,6 +4,7 @@ namespace JackBerck\SoedTrade\Service;
 
 use JackBerck\SoedTrade\Config\Database;
 use JackBerck\SoedTrade\Domain\Product;
+use JackBerck\SoedTrade\Domain\User;
 use JackBerck\SoedTrade\Exception\ValidationException;
 use JackBerck\SoedTrade\Model\ProductAddRequest;
 use JackBerck\SoedTrade\Model\ProductAddResponse;
@@ -98,5 +99,15 @@ class ProductService
     public function findAll(): array
     {
         return $this->productRepository->findAll();
+    }
+
+    public function findById(int $id): Product
+    {
+        return $this->productRepository->findById($id);
+    }
+
+    public function findUserWhoPosted(int $id): User
+    {
+        return $this->productRepository->findUserWhoPosted($id);
     }
 }

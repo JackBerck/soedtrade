@@ -25,8 +25,10 @@ Router::add('POST', '/users/password', UserController::class, 'postUpdatePasswor
 Router::add('GET', '/about-us', \JackBerck\SoedTrade\Controller\AboutUsController::class, 'index', []);
 Router::add('GET', '/contact-us', \JackBerck\SoedTrade\Controller\ContactUsController::class, 'index', []);
 Router::add('GET', '/users', \JackBerck\SoedTrade\Controller\UserController::class, 'index', [MustLoginMiddleware::class]);
+Router::add('POST', '/users', \JackBerck\SoedTrade\Controller\UserController::class, 'updateProfile', [MustLoginMiddleware::class]);
 Router::add("POST", "/users", \JackBerck\SoedTrade\Controller\UserController::class, "postUpdateProfile", [MustLoginMiddleware::class]);
-Router::add('GET', "/users/tambah-barang", \JackBerck\SoedTrade\Controller\UserController::class, "addProduct", [MustLoginMiddleware::class]);
-Router::add('POST', "/users/tambah-barang", \JackBerck\SoedTrade\Controller\UserController::class, "postAddProduct", [MustLoginMiddleware::class]);
+Router::add('GET', "/users/add-product", \JackBerck\SoedTrade\Controller\UserController::class, "addProduct", [MustLoginMiddleware::class]);
+Router::add('POST', "/users/add-product", \JackBerck\SoedTrade\Controller\UserController::class, "postAddProduct", [MustLoginMiddleware::class]);
+Router::add('GET', '/product/([0-9]*)', \JackBerck\SoedTrade\Controller\HomeController::class, 'product', []);
 
 Router::run();

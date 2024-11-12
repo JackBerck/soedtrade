@@ -10,6 +10,7 @@ module.exports = {
         "blue-base": "#1a73e8",
         "dark-base": "#111827",
         "light-base": "#f9fafb",
+        "green-base": "#22c525",
       },
       fontFamily: {
         poppins: "Poppins",

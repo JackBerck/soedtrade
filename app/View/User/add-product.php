@@ -108,6 +108,7 @@
                         <input id="dropzone-file" type="file" class="hidden" name="images[]" multiple/>
                     </label>
                 </div>
+                <div id="file-preview-container" class="grid grid-cols-4 gap-4 mt-4"></div>
             </div>
             <button
                     type="submit"
@@ -130,3 +131,81 @@
         </form>
     </div>
 </section>
+
+<script>
+    const selectedFiles = []; // Array to store selected files
+
+    document.getElementById("dropzone-file").addEventListener("change", function (event) {
+        const previewContainer = document.getElementById("file-preview-container");
+
+        // Get newly selected files
+        const files = Array.from(event.target.files);
+
+        files.forEach((file) => {
+            // Add file to selectedFiles array
+            selectedFiles.push(file);
+
+            const fileReader = new FileReader();
+
+            fileReader.onload = function (e) {
+                // Create preview element
+                const previewElement = document.createElement("div");
+                previewElement.classList.add("file-preview", "relative", "inline-block");
+
+                // Add remove button for each image
+                const removeButton = document.createElement("span");
+                removeButton.classList.add("remove-button", "absolute", "-top-2", "-right-2", "bg-red-500", "text-white", "cursor-pointer", "p-1", "rounded-full");
+                removeButton.innerHTML = `<svg class="w-4 h-4 aspect-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>`;
+                removeButton.onclick = function () {
+                    // Remove this preview element
+                    previewElement.remove();
+
+                    // Remove file from selectedFiles array
+                    const indexToRemove = selectedFiles.indexOf(file);
+                    if (indexToRemove > -1) {
+                        selectedFiles.splice(indexToRemove, 1);
+                    }
+
+                    // Recreate DataTransfer and update file input
+                    const dataTransfer = new DataTransfer();
+                    selectedFiles.forEach((f) => dataTransfer.items.add(f));
+                    document.getElementById("dropzone-file").files = dataTransfer.files;
+                };
+
+                previewElement.appendChild(removeButton);
+
+                // If file is an image, show image preview
+                if (file.type.startsWith("image/")) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("preview-image", "w-full", "h-32", "object-cover", "rounded-lg");
+                    previewElement.appendChild(img);
+                } else {
+                    // If not an image, show file name
+                    const fileName = document.createElement("p");
+                    fileName.textContent = file.name;
+                    previewElement.appendChild(fileName);
+                }
+
+                previewContainer.appendChild(previewElement);
+            };
+
+            fileReader.readAsDataURL(file);
+        });
+
+        // Update file input with selected files
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach((f) => dataTransfer.items.add(f));
+        document.getElementById("dropzone-file").files = dataTransfer.files;
+    });
+
+    // Aside menu toggle for mobile
+    const asideMenu = document.getElementById("asideMenu");
+    const asideToggle = document.getElementById("asideToggle");
+
+    asideToggle.addEventListener("click", () => {
+        asideMenu.classList.toggle("-translate-x-full");
+        asideToggle.classList.toggle("left-0");
+        asideToggle.classList.toggle("left-64");
+    });
+</script>
