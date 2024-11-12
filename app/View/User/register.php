@@ -9,10 +9,11 @@
                  role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <div>
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24"
                              stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12" />
+                                  d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </div>
                     <div class="mt-3 text-center sm:mt-5">
@@ -56,7 +57,8 @@
                     SoedTrade
                 </h2>
                 <p class="normal-font-size mb-4 md:text-center">Daftar akun baru</p>
-                <form action="/users/register" method="post" class="small-font-size flex flex-col gap-4 mb-4">
+                <form action="/users/register" method="post" class="small-font-size flex flex-col gap-4 mb-4"
+                      enctype="multipart/form-data">
                     <div class="">
                         <label for="username" class="block font-semibold mb-2"
                         >Nama lengkap <span class="text-red-600">*</span></label
@@ -148,7 +150,6 @@
                         >
                         <input
                                 class="block w-full text-sm text-dark-base border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                                aria-describedby="file_input_help"
                                 id="profile_image"
                                 name="profile_image"
                                 type="file"
@@ -161,7 +162,8 @@
                         <button
                                 type="submit"
                                 class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600"
-                        >Daftar</button
+                        >Daftar
+                        </button
                         >
                     </div>
                 </form>

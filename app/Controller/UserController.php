@@ -277,4 +277,52 @@ class UserController
             ]);
         }
     }
+
+    public function savedProducts(): void
+    {
+        $user = $this->sessionService->current();
+        $products = $this->productService->getSavedProducts($user->user_id);
+
+        $model = ["title" => "Barang yang Disimpan"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        if ($products != null) {
+            $model["products"] = $products;
+        }
+
+        View::render('User/saved-products', model: $model);
+    }
+
+    public function postSavedProducts(): void
+    {
+        $user = $this->sessionService->current();
+        $product_id = $_POST['product_id'];
+
+        if ($this->productService->isProductSaved($user->user_id, $product_id)) {
+            echo "<script>
+                alert('Produk ini sudah disimpan sebelumnya');
+                window.location.href = '/product/' + $product_id;
+              </script>";
+        } else {
+            $this->productService->saveProduct($user->user_id, $product_id);
+            echo "<script>
+                alert('Produk disimpan!');
+                window.location.href = '/product/' + $product_id;
+              </script>";
+        }
+    }
+
+    public function deleteSavedProduct(): void
+    {
+        $user = $this->sessionService->current();
+        $product_id = $_POST['product_id'];
+
+        $this->productService->deleteSavedProduct($user->user_id, $product_id);
+        View::redirect('/users/saved-products');
+    }
 }

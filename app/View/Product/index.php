@@ -87,9 +87,6 @@ $url = $protocol . $host . $requestUri;
                 <p class="small-font-size text-gray-600 font-light">
                     Ditawarkan <span id="createdAt"
                                      data-date="<?= str_replace(' ', 'T', $product->created_at) ?>"><?= $product->created_at ?></span>
-                    yang lalu
-                    di <?= "Nguwawi" ?>
-                </p>
                 </p>
             </div>
             <div class="flex gap-2 items-center mb-4">
@@ -106,6 +103,14 @@ $url = $protocol . $host . $requestUri;
                         <path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"/>
                     </svg>
                 </button>
+                <form action="/users/saved-products/save" method="post" onsubmit="savedProduct()" class="w-9 h-9">
+                    <input type="hidden" name="product_id" value="<?= $product->product_id ?>">
+                    <button type="submit" class="w-9 h-9 aspect-square rounded-lg bg-gray-300 px-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
             <div class="">
                 <h2 class="subtitle-font-size font-bold mb-2">Detail</h2>

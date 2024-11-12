@@ -125,4 +125,24 @@ class ProductService
     {
         $this->productRepository->update($product);
     }
+
+    public function saveProduct(int $userId, int $productId): void
+    {
+        $this->productRepository->saveProduct($userId, $productId);
+    }
+
+    public function deleteSavedProduct(int $userId, int $productId): void
+    {
+        $this->productRepository->deleteSavedProduct($userId, $productId);
+    }
+
+    public function isProductSaved(int $userId, int $productId): bool
+    {
+        return $this->productRepository->isProductSaved($userId, $productId);
+    }
+
+    public function getSavedProducts(int $id): array
+    {
+        return $this->productRepository->getSavedProducts($id);
+    }
 }
