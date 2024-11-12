@@ -77,7 +77,7 @@ $url = $protocol . $host . $requestUri;
             <div class="flex items-center gap-2 border-b-2 border-b-gray-400 pb-2">
                 <img src="/images/profiles/<?= $userWhoPosted->profile_image ?? "default.webp" ?>"
                      alt="Foto profil <?= $userWhoPosted->username ?? "" ?>"
-                     class="rounded-full w-10 aspect-square"/>
+                     class="rounded-full w-10 aspect-square object-cover"/>
                 <p class="small-font-size font-semibold"><?= $userWhoPosted->username ?? "User" ?></p>
             </div>
             <div class="mb-2 mt-2">

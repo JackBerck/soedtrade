@@ -110,4 +110,14 @@ class ProductService
     {
         return $this->productRepository->findUserWhoPosted($id);
     }
+
+    public function getProductsBySellerId(int $id): array
+    {
+        return $this->productRepository->getProductsBySellerId($id);
+    }
+
+    public function deleteProduct(string $id): void
+    {
+        $this->productRepository->delete($id);
+    }
 }

@@ -200,4 +200,33 @@ class UserController
             echo $exception->getMessage();
         }
     }
+
+    public function manageProducts(): void
+    {
+        $user = $this->sessionService->current();
+        $products = $this->productService->getProductsBySellerId($user->user_id);
+
+        $model = ["title" => "Kelola Barang"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+
+        if ($products != null) {
+            $model["products"] = $products;
+        }
+
+        View::render('User/manage-products', model: $model);
+    }
+
+    public function deleteProduct(): void
+    {
+        $product_id = $_POST['product_id'];
+
+        $this->productService->deleteProduct($product_id);
+        View::redirect('/users/manage-products');
+    }
 }

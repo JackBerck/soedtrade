@@ -1,7 +1,7 @@
 <?php
 $user = $model['user'] ?? null;
-$username = $user->username ?? null;
-$profilePhoto = $user->profile_image ?? 'default.webp';
+$username = $user['username'] ?? null;
+$profile_image = $user['profile_image'] ?? 'default.webp';
 ?>
 
 <!DOCTYPE html>
@@ -84,9 +84,8 @@ $profilePhoto = $user->profile_image ?? 'default.webp';
                 <?php if (isset($user)) : ?>
                     <li class="py-1 px-2 md:p-0 md:justify-center items-center gap-2">
                         <a href="/users">
-                            <img src="/images/profiles/<?= $profilePhoto ?>" alt="Photo Profile <?= $username ?>"
-                                 class="w-8 rounded-full">
-                            <span class="text-light-base"><?= $username ?></span>
+                            <img src="/images/profiles/<?= $profile_image ?>" alt="Photo Profile <?= $username ?>"
+                                 class="w-8 rounded-full object-cover aspect-square">
                         </a>
                     </li>
                 <?php else : ?>

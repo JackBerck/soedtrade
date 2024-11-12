@@ -142,10 +142,10 @@ $productsImage = $model["productsImage"] ?? [];
                                     alt="<?= $product->name; ?> foto"/>
                         </a>
                         <div class="p-3">
-                            <a href="product?id=<?= $index; ?>">
-                                <p class="price-title-font-size text-gray-700 price">
-                                    <?= $product->price; ?>
-                                </p>
+                            <p class="price-title-font-size text-gray-700 price">
+                                <?= $product->price; ?>
+                            </p>
+                            <a href="product/<?= $product->product_id; ?>">
                                 <h5 class="mb-2 card-title-font-size font-bold tracking-tight text-dark-base title-product">
                                     <?= $product->name; ?>
                                 </h5>

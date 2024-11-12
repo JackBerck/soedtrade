@@ -28,19 +28,19 @@ $user = $model["user"] ?? null;
                 <div class="sticky flex flex-col gap-2 text-sm">
                     <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
                     <a
-                            href="/profile"
+                            href="/users"
                             class="flex items-center px-3 py-2.5 font-semibold"
                     >Pengaturan Akun</a>
                     <a
-                            href="/profile/produk-tersimpan"
+                            href="/users/saved-products"
                             class="flex items-center px-3 py-2.5 font-semibold"
                     >Barang Tersimpan</a>
                     <a
-                            href="/profile/kelola-produk"
+                            href="/users/manage-products"
                             class="flex items-center px-3 py-2.5 font-semibold"
                     >Kelola Produk</a>
                     <a
-                            href="/profile/keluar"
+                            href="/users/logout"
                             class="flex items-center px-3 py-2.5 font-semibold bg-red-600 text-light-base rounded-lg"
                     >Keluar</a>
                 </div>
