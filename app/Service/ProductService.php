@@ -145,4 +145,9 @@ class ProductService
     {
         return $this->productRepository->getSavedProducts($id);
     }
+
+    public function searchProducts(string $keyword): array
+    {
+        return $this->productRepository->searchProducts($keyword);
+    }
 }

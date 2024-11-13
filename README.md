@@ -1,10 +1,7 @@
 # SoedTrade
 
----
-
 ## Deskripsi
 
----
 SoedTrade adalah platform online khusus untuk mahasiswa Universitas Jenderal Soedirman yang memungkinkan mereka untuk
 membeli dan menjual berbagai barang, baik baru maupun bekas. Pengguna dapat dengan mudah mengakses marketplace ini
 melalui situs web, di mana Mahasiswa dapat menjadi penjual dengan mengunggah produk beserta foto, deskripsi, dan harga,
@@ -14,8 +11,6 @@ dalam proses pembayaran. Marketplace ini menawarkan kemudahan akses, jangkauan l
 kemampuan untuk melihat profil pengguna yang meningkatkan rasa percaya dalam transaksi antar mahasiswa.
 
 ## Fitur
-
----
 
 1. **Pencarian Produk**: Pengguna dapat mencari produk yang diinginkan berdasarkan kata kunci, lokasi, harga, atau
    kategori.
@@ -28,8 +23,6 @@ kemampuan untuk melihat profil pengguna yang meningkatkan rasa percaya dalam tra
 
 ## Teknologi
 
----
-
 1. **Frontend**: HTML, CSS, JavaScript
 2. **Backend**: PHP
 3. **Database**: MySQL
@@ -37,8 +30,6 @@ kemampuan untuk melihat profil pengguna yang meningkatkan rasa percaya dalam tra
 5. **Framework**: Tailwind CSS, Swiper JS
 
 ## Cara Penggunaan
-
----
 
 1. Clone repository ini ke dalam direktori web server (misal: `htdocs` pada XAMPP atau www pada laragon).
 2. Import database `soedtrade.sql` ke dalam MySQL.

@@ -246,4 +246,42 @@ class ProductRepository
 
         return array_values($data); // Mengembalikan array produk
     }
+
+    public function searchProducts(string $keyword): array
+    {
+        $statement = $this->connection->prepare("
+        SELECT p.product_id, p.seller_id, p.name, p.price, p.description, p.condition, p.category, p.created_at, pi.image_name
+        FROM products p
+        LEFT JOIN product_images pi ON p.product_id = pi.product_id
+        WHERE p.name LIKE ?
+    ");
+
+        $statement->execute(["%$keyword%"]);
+
+        $rows = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        $data = [];
+        foreach ($rows as $row) {
+            // Cek apakah produk sudah ada dalam array
+            if (!isset($data[$row['product_id']])) {
+                $data[$row['product_id']] = new Product();
+                $data[$row['product_id']]->product_id = $row['product_id'];
+                $data[$row['product_id']]->seller_id = $row['seller_id'];
+                $data[$row['product_id']]->name = $row['name'];
+                $data[$row['product_id']]->price = $row['price'];
+                $data[$row['product_id']]->description = $row['description'];
+                $data[$row['product_id']]->condition = $row['condition'];
+                $data[$row['product_id']]->category = $row['category'];
+                $data[$row['product_id']]->created_at = $row['created_at'];
+                $data[$row['product_id']]->images = []; // Inisialisasi array untuk gambar
+            }
+
+            // Tambahkan gambar ke produk
+            if ($row['image_name']) {
+                $data[$row['product_id']]->images[] = $row['image_name'];
+            }
+        }
+
+        return array_values($data); // Mengembalikan array produk
+    }
 }

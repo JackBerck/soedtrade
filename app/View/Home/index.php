@@ -199,15 +199,13 @@ $productsImage = $model["productsImage"] ?? [];
     });
 
     // Dropdown menu for the category page
-    if (window.location.pathname === "/") {
-        const dropdownButton = document.getElementById("dropdown-button");
-        const dropdown = document.getElementById("dropdown");
+    const dropdownButton = document.getElementById("dropdown-button");
+    const dropdown = document.getElementById("dropdown");
 
-        dropdownButton.addEventListener("click", () => {
-            dropdown.classList.toggle("hidden");
-            dropdown.classList.toggle("block");
-        });
-    }
+    dropdownButton.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+        dropdown.classList.toggle("block");
+    });
 
     // Format the price to currency
     const getPrice = document.querySelectorAll(".price");

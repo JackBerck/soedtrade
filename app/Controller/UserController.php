@@ -329,4 +329,17 @@ class UserController
         $this->productService->deleteSavedProduct($user->user_id, $product_id);
         View::redirect('/users/saved-products');
     }
+
+    public function searchProducts(): void
+    {
+        $keyword = $_GET['query'];
+        $products = $this->productService->searchProducts($keyword);
+
+        $model = ["title" => "Hasil Pencarian"];
+        if ($products != null) {
+            $model["products"] = $products;
+        }
+
+        View::render('search', model: $model);
+    }
 }

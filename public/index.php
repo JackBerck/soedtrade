@@ -37,6 +37,7 @@ Router::add('POST', '/users/manage-products/update-product/([0-9]*)', \JackBerck
 Router::add('GET', '/users/saved-products', \JackBerck\SoedTrade\Controller\UserController::class, 'savedProducts', [MustLoginMiddleware::class]);
 Router::add('POST', '/users/saved-products/save', \JackBerck\SoedTrade\Controller\UserController::class, 'postSavedProducts', [MustLoginMiddleware::class]);
 Router::add('POST', '/users/saved-products/delete', \JackBerck\SoedTrade\Controller\UserController::class, 'deleteSavedProduct', [MustLoginMiddleware::class]);
+Router::add('GET', '/search', UserController::class, 'searchProducts', []);
 
 
 Router::run();
