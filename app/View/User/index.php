@@ -89,20 +89,25 @@ $user = $model["user"] ?? null;
                     />
                 </div>
                 <div class="">
-                    <label for="phoneNumber" class="block font-semibold mb-2"
-                    >Nomor Handphone</label
-                    >
-                    <input
-                            class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                            type="text"
-                            id="phoneNumber"
-                            name="phone_number"
-                            placeholder="Masukkan nomor handphone..."
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            value="<?= $user['phone_number'] ?>"
-                            disabled
-                    />
+                    <label for="phoneNumber" class="block font-semibold mb-2">
+                        Nomor Handphone
+                    </label>
+                    <div class="flex items-center">
+                        <span class="bg-gray-200 border border-gray-300 rounded-l py-2 px-4 text-gray-700">+62</span>
+                        <input
+                                class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded-r py-2 px-4 block w-full appearance-none"
+                                type="text"
+                                id="phoneNumber"
+                                name="phone_number"
+                                placeholder="Masukkan nomor handphone..."
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                disabled
+                                value="<?= $user['phone_number'] ?: '' ?>"
+                                required
+                                maxlength="12"
+                        />
+                    </div>
                 </div>
                 <div class="">
                     <label for="location" class="block font-semibold mb-2">Alamat</label>

@@ -86,19 +86,23 @@
                         />
                     </div>
                     <div class="">
-                        <label for="phone_number" class="block font-semibold mb-2"
-                        >Nomor Handphone <span class="text-red-600">*</span></label
-                        >
-                        <input
-                                class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="text"
-                                id="phone_number"
-                                name="phone_number"
-                                placeholder="Masukkan nomor handphone..."
-                                inputmode="numeric"
-                                pattern="[0-9]*"
-                                required
-                        />
+                        <label for="phone_number" class="block font-semibold mb-2">
+                            Nomor Handphone <span class="text-red-600">*</span>
+                        </label>
+                        <div class="flex items-center">
+                            <span class="bg-gray-200 border border-gray-300 rounded-l py-2 px-4 text-gray-700">+62</span>
+                            <input
+                                    class="bg-gray-200 focus:outline-none focus:shadow-outline border border-gray-300 rounded-r py-2 px-4 block w-full appearance-none"
+                                    type="text"
+                                    id="phone_number"
+                                    name="phone_number"
+                                    placeholder="Masukkan nomor handphone..."
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
+                                    required
+                                    maxlength="13"
+                            />
+                        </div>
                     </div>
                     <div class="">
                         <div class="flex justify-between">

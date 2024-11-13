@@ -69,9 +69,13 @@ class UserController
         $request->username = $_POST['username'];
         $request->email = $_POST['email'];
         $request->password = $_POST['password'];
-        $request->profile_image = $_POST['profile_image'];
         $request->phone_number = $_POST['phone_number'];
         $request->address = $_POST['address'];
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+            $request->profile_image = $_FILES['profile_image'];
+        } else {
+            $request->profile_image = null;
+        }
 
         try {
             $this->userService->register($request);

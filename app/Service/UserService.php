@@ -27,6 +27,7 @@ class UserService
     public function register(UserRegisterRequest $request): UserRegisterResponse
     {
         $this->validateUserRegistrationRequest($request);
+        $pathImage = __DIR__ . "/../../public/images/profiles/";
 
         try {
             Database::beginTransaction();
@@ -38,11 +39,16 @@ class UserService
             $user->username = $request->username;
             $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
+
             if ($request->profile_image == NULL) {
                 $user->profile_image = "default.webp";
             } else {
-                $user->profile_image = $request->profile_image;
+                $extension = pathinfo($request->profile_image['name'], PATHINFO_EXTENSION);
+                $namePhoto = uniqid() . '.' . $extension;
+                move_uploaded_file($request->profile_image['tmp_name'], $pathImage . $namePhoto);
+                $user->profile_image = $namePhoto;
             }
+
             $user->phone_number = $request->phone_number;
             $user->address = $request->address;
 
