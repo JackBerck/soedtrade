@@ -36,9 +36,9 @@ $url = $protocol . $host . $requestUri;
         position: relative;
     }
 
-    <?php foreach ($product->images as $image) : ?>
+    <?php foreach ($product->images as $index=>$image) : ?>
     @media screen and (min-width: 768px) {
-        .swiper-slide::before {
+        .swiper-slide-<?= $index ?>::before {
             content: "";
             position: absolute;
             top: 0;
@@ -59,8 +59,8 @@ $url = $protocol . $host . $requestUri;
     <div class="w-full md:w-3/5 h-[216px] md:h-auto">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <?php foreach ($product->images as $image) : ?>
-                    <div class="swiper-slide">
+                <?php foreach ($product->images as $index => $image) : ?>
+                    <div class="swiper-slide swiper-slide-<?= $index ?>">
                         <img src="/images/products/<?= $image ?>" alt="Foto <?= $product->name ?>"
                              class="max-w-md object-cover rounded-lg max-h-[720px]"/>
                     </div>

@@ -65,7 +65,13 @@ $productsImage = $model["productsImage"] ?? [];
                 <div
                         id="dropdown"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute top-12">
-                    <ul class="py-2 text-gray-700" aria-labelledby="dropdown-button">
+                    <ul class="py-2 text-gray-700 capitalize" aria-labelledby="dropdown-button">
+                        <li>
+                            <button
+                                    type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Semua kategori
+                            </button>
+                        </li>
                         <li>
                             <button
                                     type="button"
@@ -105,9 +111,8 @@ $productsImage = $model["productsImage"] ?? [];
                             class="block p-2.5 w-full z-20 focus:outline-none text-dark-base bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
                             placeholder="Cari barang elektronik, kendaraan, dan lainnya"
                             required/>
-                    <button
-                            type="submit"
-                            class="absolute top-0 end-0 p-2.5 font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800">
+                    <span
+                            class="absolute top-0 end-0 p-2.5 font-medium h-full text-dark-base rounded-e-lg flex items-center justify-center">
                         <svg
                                 class="w-4 h-4"
                                 aria-hidden="true"
@@ -122,7 +127,7 @@ $productsImage = $model["productsImage"] ?? [];
                                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
                         </svg>
                         <span class="sr-only">Search</span>
-                    </button>
+                    </span>
                 </div>
             </div>
         </form>
@@ -134,7 +139,8 @@ $productsImage = $model["productsImage"] ?? [];
                 </div>
             <?php else: ?>
                 <?php foreach ($products as $index => $product): ?>
-                    <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow">
+                    <div class="max-w-[300px] aspect-square bg-white border border-gray-200 rounded-lg shadow product-card">
+                        <p class="hidden product-condition"><?= $product->category ?></p>
                         <a href="product/<?= $product->product_id; ?>">
                             <img
                                     class="rounded-t-lg object-cover w-full h-24 md:h-48"
@@ -238,4 +244,64 @@ $productsImage = $model["productsImage"] ?? [];
     getDescription.forEach((description) => {
         description.innerText = truncateDescription(description.innerText);
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("search-dropdown");
+        const categoryDropdown = document.getElementById("dropdown");
+        const categoryButton = document.getElementById("dropdown-button");
+        const productCards = document.querySelectorAll(".product-card");
+        const categoryOptions = categoryDropdown.querySelectorAll("button");
+
+        let selectedCategory = "Semua Kategori";
+        let selectedCategoryToCapitalize = "Semua Kategori";
+
+        // Update selected category when clicking a dropdown option
+        categoryOptions.forEach((option) => {
+            option.addEventListener("click", (e) => {
+                selectedCategory = e.target.innerText.toLowerCase();
+                selectedCategoryToCapitalize = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1);
+                categoryButton.innerHTML = `${selectedCategoryToCapitalize} <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"></path></svg>`;
+                dropdown.classList.add("hidden");
+                filterProducts();
+            });
+        });
+
+        // Add input event listener for search
+        searchInput.addEventListener("input", () => {
+            filterProducts();
+        });
+
+        // Filter function
+        const filterProducts = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            let visibleCount = 0; // Track visible products
+            productCards.forEach((card) => {
+                const title = card.querySelector(".title-product").innerText.toLowerCase();
+                const category = card.querySelector(".product-condition").innerText.toLowerCase();
+
+                const matchesTitle = title.includes(searchTerm);
+                const matchesCategory = selectedCategory === "Semua Kategori" || selectedCategory === category;
+
+                if (searchTerm === "" && selectedCategory === "semua kategori") {
+                    card.style.display = "block";
+                    visibleCount++;
+                } else {
+                    if (matchesTitle && matchesCategory) {
+                        card.style.display = "block";
+                        visibleCount++;
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            });
+
+            // Handle "no products found" message
+            const noProductsMessage = document.querySelector(".col-span-full.text-center");
+            if (noProductsMessage) {
+                noProductsMessage.style.display = visibleCount > 0 ? "none" : "block";
+            }
+        };
+    });
+
 </script>

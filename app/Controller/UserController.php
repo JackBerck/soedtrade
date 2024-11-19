@@ -325,17 +325,27 @@ class UserController
     {
         $user = $this->sessionService->current();
         $product_id = $_POST['product_id'];
-
         $this->productService->deleteSavedProduct($user->user_id, $product_id);
-        View::redirect('/users/saved-products');
+        echo "<script>
+                alert('Produk dihapus dari daftar simpanan!');
+                window.location.href = '/users/saved-products';
+              </script>";
     }
 
     public function searchProducts(): void
     {
+        $user = $this->sessionService->current();
         $keyword = $_GET['query'];
-        $products = $this->productService->searchProducts($keyword);
 
         $model = ["title" => "Hasil Pencarian"];
+        if ($user != null) {
+            $model["user"] = [
+                "username" => $user->username,
+                "profile_image" => $user->profile_image,
+            ];
+        }
+
+        $products = $this->productService->searchProducts($keyword);
         if ($products != null) {
             $model["products"] = $products;
         }

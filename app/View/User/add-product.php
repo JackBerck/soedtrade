@@ -60,7 +60,7 @@
                         <option value="Elektronik">Elektronik</option>
                         <option value="Kendaraan">Kendaraan</option>
                         <option value="Alat Musik">Alat Musik</option>
-                        <option value="Pekaian">Pakaian</option>
+                        <option value="Pakaian">Pakaian</option>
                         <option value="Hobi & Hiburan">Hobi & Hiburan</option>
                     </select>
                 </div>
