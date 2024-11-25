@@ -287,7 +287,7 @@ class UserController
         $user = $this->sessionService->current();
         $products = $this->productService->getSavedProducts($user->user_id);
 
-        $model = ["title" => "Barang yang Disimpan"];
+        $model = ["title" => "Barang Tersimpan"];
         if ($user != null) {
             $model["user"] = [
                 "username" => $user->username,

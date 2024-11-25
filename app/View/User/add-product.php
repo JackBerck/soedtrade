@@ -4,7 +4,7 @@
 >
     <div class="max-w-screen-xl container">
         <h1 class="font-bold subheader-font-size mb-4">Tambahkan Barang</h1>
-        <form action="/users/tambah-barang" method="post" enctype="multipart/form-data">
+        <form action="/users/add-product" method="post" enctype="multipart/form-data">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                     <label for="name" class="block mb-2 font-medium text-dark-base"

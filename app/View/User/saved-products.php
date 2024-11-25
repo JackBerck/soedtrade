@@ -89,7 +89,7 @@ $products = $model['products'] ?? [];
             <!-- Manage Products Start -->
             <div class="md:w-2/3 lg:w-3/4">
                 <h1 class="subheader-font-size font-semibold text-dark-base mb-4">
-                    Kelola Produk
+                    Barang Tersimpan
                 </h1>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-between">
                     <?php if (empty($products)): ?>

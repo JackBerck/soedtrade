@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 19, 2024 at 11:42 AM
+-- Generation Time: Nov 25, 2024 at 11:33 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.12
 
@@ -50,7 +50,8 @@ INSERT INTO `products` (`product_id`, `seller_id`, `name`, `price`, `description
 (27, 6, 'Yamaha NMAX 155', 22000000, 'Yamaha NMAX baru, motor elegan dan nyaman banget buat jalan jauh. Nyaman buat riding santai.', 'Baru', 'Kendaraan', '2024-11-10 06:41:31'),
 (28, 6, 'Gitar Fender Stratocaster', 8000000, 'Gitar Fender asli, suara mantap banget! Cocok buat yang hobi ngeband, dijual karena mau upgrade.', 'Bekas', 'Alat Musik', '2024-11-10 06:42:53'),
 (29, 6, 'Keyboard Yamaha PSR-E373', 4000000, 'Keyboard Yamaha, kondisi baru! Suara oke banget, buat belajar atau main musik di rumah.', 'Baru', 'Alat Musik', '2024-11-10 06:43:56'),
-(30, 6, 'Jaket Bomber', 350000, 'Jaket bomber kekinian, cocok buat nongkrong, bahan adem dan nyaman dipakai. Warna netral, cocok di segala cuaca.', 'Baru', 'Pakaian', '2024-11-10 06:45:03');
+(30, 6, 'Jaket Bomber', 350000, 'Jaket bomber kekinian, cocok buat nongkrong, bahan adem dan nyaman dipakai. Warna netral, cocok di segala cuaca.', 'Baru', 'Pakaian', '2024-11-10 06:45:03'),
+(32, 9, 'Vespa PX 1979', 17000000, 'Vespa px 1979 sudah CDI pajak hidup\r\n17 nego motor sehat \r\nMesin alus \r\nLok purbalingga \r\n085700233338\r\nAsli R purbalingga\r\nAsli putih', 'Bekas', 'Kendaraan', '2024-11-25 11:30:04');
 
 -- --------------------------------------------------------
 
@@ -82,7 +83,9 @@ INSERT INTO `product_images` (`image_id`, `product_id`, `image_name`) VALUES
 (11, 28, '673055edc825b.jpg'),
 (12, 29, '6730562c3a2cb.jpg'),
 (13, 29, '6730562c3a6f1.jpg'),
-(14, 30, '6730566f66be4.jpg');
+(14, 30, '6730566f66be4.jpg'),
+(17, 32, '67445fbc0b588.jpg'),
+(18, 32, '67445fbc0baa7.jpg');
 
 -- --------------------------------------------------------
 
@@ -96,6 +99,13 @@ CREATE TABLE `saved_products` (
   `product_id` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `saved_products`
+--
+
+INSERT INTO `saved_products` (`saved_id`, `user_id`, `product_id`, `created_at`) VALUES
+(9, 9, 24, '2024-11-25 11:25:18');
 
 -- --------------------------------------------------------
 
@@ -121,7 +131,7 @@ INSERT INTO `sessions` (`id`, `user_id`) VALUES
 ('672b0e38556fb', 6),
 ('672f4998d9959', 6),
 ('6731755e0ac44', 6),
-('6734052998e8f', 8);
+('67445e8db2327', 9);
 
 -- --------------------------------------------------------
 
@@ -152,7 +162,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `profile_image`
 (5, 'Jack Berck', 'berckjack@gmail.com', '$2y$10$.XE9Pna474CBC/sjUkkgFeHyS30uCYcpLy4xbBlTVnib1.VS3j/Fu', 'default.webp', 85786470923, 'Jl. Diponegoro, Dk. Kauman, Ds. Tersono, Kec. Tersono, Kab. Batang, Jawa Tengah', '2024-11-05 05:44:26'),
 (6, 'Elle Fanning', 'ellefanning@gmail.com', '$2y$10$zlwbQ76pAOepE5HxA9npTOA5h5mtLPUxlC2JfvUNdtfO469XqmsrS', '673363ec3ed7f.jpg', 87123321123, 'Jl. Dr. Wahidin Sudirohusodo No.81, Sukapura, Kec. Kejaksan, Kota Cirebon, Jawa Barat 45122', '2024-11-05 23:35:21'),
 (7, 'Cek Saja', 'ceksaja@gmail.com', '$2y$10$gz.90h6s2lMUkM5Rdn3gS.KNDClzGJ8Eom.6YoNoP2M77Txw8VLnS', 'default.webp', 86312312399, 'Jl. Prof. Dr. H.R. Boenyamin No. 708', '2024-11-13 01:39:33'),
-(8, 'Mau Apa', 'mauapa@gmail.com', '$2y$10$eGDqqs5n5tY1jPk0H5qnz.HFACXhPyd0rJTEBLpPZ8wW9qv1l4bpS', '6734051fcd7fe.jpg', 8123123123, 'Karang Bawang, Grendeng, Kec. Purwokerto Utara, Kabupaten Banyumas, Jawa Tengah 53122', '2024-11-13 01:47:11');
+(8, 'Mau Apa', 'mauapa@gmail.com', '$2y$10$eGDqqs5n5tY1jPk0H5qnz.HFACXhPyd0rJTEBLpPZ8wW9qv1l4bpS', '6734051fcd7fe.jpg', 8123123123, 'Karang Bawang, Grendeng, Kec. Purwokerto Utara, Kabupaten Banyumas, Jawa Tengah 53122', '2024-11-13 01:47:11'),
+(9, 'Muhammad Zaki Dzulfikar', 'zakidzulfikar@gmail.com', '$2y$10$C0OKC7ABPj1VWPaV6e7Z0uMEddbNuf03oJtektZPR6KiK4rtWEQni', '67445e8387d40.jpg', 85786470954, 'Jl. Diponegoro, Kecamatan Tersono Batang, Jawa Tengah 51272', '2024-11-25 11:24:51');
 
 --
 -- Indexes for dumped tables
@@ -204,25 +215,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `product_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `saved_products`
 --
 ALTER TABLE `saved_products`
-  MODIFY `saved_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `saved_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
